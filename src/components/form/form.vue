@@ -24,10 +24,11 @@
         :new-item="newItem"
         @activate="activateField"
         @deactivate="deactivateField"
-        @stage-value="$emit('stage-value', $event);"
+        @stage-value="$emit('stage-value', $event)"
       />
       <v-field
         v-else
+        :name="uniqueID + '-' + field.field"
         :field="field"
         :values="values"
         :fields="fields"
@@ -37,7 +38,7 @@
         :new-item="newItem"
         @activate="activateField"
         @deactivate="deactivateField"
-        @stage-value="$emit('stage-value', $event);"
+        @stage-value="$emit('stage-value', $event)"
       />
     </div>
   </form>
@@ -84,7 +85,8 @@ export default {
   },
   data() {
     return {
-      activeFields: []
+      activeFields: [],
+      uniqueID: ""
     };
   },
   computed: {
@@ -162,6 +164,13 @@ export default {
 
       return false;
     }
+  },
+  created() {
+    this.uniqueID = this.$helpers.shortid.generate();
+    // NOTE field names should be prefixed with a unique ID per form. If not,
+    // we'll run into conflicts. There can be multiple instances of a form
+    // with the same fields, which would result in multiple inputs with the same
+    // name / id, which can cause conflicts
   }
 };
 </script>
@@ -203,6 +212,10 @@ export default {
     .col-4 {
       max-width: var(--width-x-large);
       flex-basis: var(--width-x-large);
+
+      & & {
+        max-width: 100%;
+      }
     }
   }
 

@@ -21,14 +21,15 @@
     <v-header
       :breadcrumb="breadcrumb"
       :info-toggle="!newItem && !batch && !activityDetail"
+      item-detail
     >
       <template slot="buttons">
         <v-header-button
           v-if="!newItem && !singleItem && permission.delete !== 'none'"
-          icon="close"
+          icon="delete_outline"
           color="danger"
           :label="$t('delete')"
-          @click="confirmRemove = true;"
+          @click="confirmRemove = true"
         />
 
         <v-header-button
@@ -38,7 +39,7 @@
           :label="$t('save')"
           icon="check"
           color="action"
-          @click="confirmBatchSave = true;"
+          @click="confirmBatchSave = true"
         />
 
         <v-header-button
@@ -55,30 +56,30 @@
           }"
           icon="check"
           color="action"
-          @click="singleItem ? save('stay') : save('leave');"
+          @click="singleItem ? save('stay') : save('leave')"
           @input="save"
         />
       </template>
     </v-header>
 
-    <v-info-sidebar v-if="!newItem && !batch" wide>
+    <v-info-sidebar v-if="!newItem && !batch" wide item-detail>
       <div class="tabs">
         <button
           :class="{ active: activeTab === 'both' }"
-          @click="activeTab = 'both';"
+          @click="activeTab = 'both'"
         >
           {{ $t("both") }}
         </button>
         <button
           v-if="permission.comment !== 'none'"
           :class="{ active: activeTab === 'comments' }"
-          @click="activeTab = 'comments';"
+          @click="activeTab = 'comments'"
         >
           {{ $t("comments") }}
         </button>
         <button
           :class="{ active: activeTab === 'activity' }"
-          @click="activeTab = 'activity';"
+          @click="activeTab = 'activity'"
         >
           {{ $t("activity") }}
         </button>
@@ -90,7 +91,7 @@
         :show="activeTab"
         :comment-permission="permission.comment"
         @input="postComment"
-        @revert="revertActivity = $event;"
+        @revert="revertActivity = $event"
       />
     </v-info-sidebar>
 
@@ -117,7 +118,7 @@
             : $t('delete_are_you_sure')
         "
         :busy="confirmRemoveLoading"
-        @cancel="confirmRemove = false;"
+        @cancel="confirmRemove = false"
         @confirm="remove"
       />
     </portal>
@@ -127,7 +128,7 @@
         :message="$t('unsaved_changes_copy')"
         :confirm-text="$t('keep_editing')"
         :cancel-text="$t('discard_changes')"
-        @confirm="confirmNavigation = false;"
+        @confirm="confirmNavigation = false"
         @cancel="
           $router.push(leavingTo);
           confirmNavigation = false;
@@ -139,8 +140,8 @@
       <v-confirm
         :message="$t('update_confirm', { count: primaryKey.split(',').length })"
         :confirm-text="$t('update')"
-        @confirm="save('leave');"
-        @cancel="confirmBatchSave = false;"
+        @confirm="save('leave')"
+        @cancel="confirmBatchSave = false"
       />
     </portal>
 
@@ -153,8 +154,8 @@
             loading: reverting
           }
         }"
-        @revert="revertItem(revertActivity.revision.id);"
-        @close="revertActivity = false;"
+        @revert="revertItem(revertActivity.revision.id)"
+        @close="revertActivity = false"
       >
         <div class="revert">
           <p class="notice">
@@ -558,6 +559,9 @@ export default {
 
         this.$lodash.forEach(this.fields, (info, fieldName) => {
           if (info.primary_key === true) primaryKeyField = fieldName;
+
+          // Delete the alias type fields
+          if (info.type.toLowerCase() === "alias") delete values[fieldName];
         });
 
         delete values[primaryKeyField];
@@ -577,7 +581,7 @@ export default {
           })
           .then(pk => {
             this.$notify({
-              title: this.$t("item_saved"),
+              title: this.$tc("item_saved"),
               color: "green",
               iconMain: "check"
             });
@@ -644,11 +648,11 @@ export default {
           }
 
           if (method === "add") {
-            if (this.collection.startsWith("directus_")) {
-              return this.$router.push(`/${this.collection.substring(9)}/+`);
-            }
-
-            return this.$router.push(`/collections/${this.collection}/+`);
+            return this.$store.dispatch("startEditing", {
+              collection: this.collection,
+              primaryKey: "+",
+              savedValues: {}
+            });
           }
         })
         .catch(error => {
@@ -693,9 +697,14 @@ export default {
           return {
             activity: activity.map(act => {
               const date = new Date(act.action_on);
-              const name = `${act.action_by.first_name} ${
-                act.action_by.last_name
-              }`;
+              let name;
+
+              if (act.action_by) {
+                name = act.action_by.first_name + " " + act.action_by.last_name;
+              } else {
+                name = "Public";
+              }
+
               return {
                 id: act.id,
                 date,

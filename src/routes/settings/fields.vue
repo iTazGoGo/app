@@ -4,11 +4,11 @@
     <v-header :breadcrumb="breadcrumb">
       <template slot="buttons">
         <v-header-button
-          icon="close"
+          icon="delete_outline"
           key="delete"
           color="danger"
           :label="$t('delete')"
-          @click="confirmRemove = true;"
+          @click="confirmRemove = true"
         />
         <v-header-button
           icon="check"
@@ -39,7 +39,7 @@
         <draggable v-model="fields" @start="startSort" @end="saveSort">
           <div class="row" v-for="field in fields" :key="field.field">
             <div class="drag"><i class="material-icons">drag_handle</i></div>
-            <div class="inner row" @click.stop="startEditingField(field);">
+            <div class="inner row" @click.stop="startEditingField(field)">
               <div>
                 {{ $helpers.formatTitle(field.field) }}
                 <i
@@ -63,7 +63,11 @@
                 }}
               </div>
             </div>
-            <v-popover class="more-options" placement="left-start">
+            <v-popover
+              class="more-options"
+              placement="left-start"
+              v-if="canDuplicate(field.interface) || fields.length > 1"
+            >
               <button type="button" class="menu-toggle">
                 <i class="material-icons">more_vert</i>
               </button>
@@ -73,7 +77,7 @@
                     <button
                       v-close-popover
                       type="button"
-                      @click.stop="duplicateField(field);"
+                      @click.stop="duplicateField(field)"
                       :disabled="!canDuplicate(field.interface)"
                     >
                       <i class="material-icons">control_point_duplicate</i>
@@ -83,8 +87,9 @@
                   <li>
                     <button
                       v-close-popover
+                      :disabled="fields.length === 1"
                       type="button"
-                      @click.stop="warnRemoveField(field.field);"
+                      @click.stop="warnRemoveField(field.field)"
                     >
                       <i class="material-icons">close</i> {{ $t("delete") }}
                     </button>
@@ -97,7 +102,7 @@
       </div>
     </div>
 
-    <v-button @click="startEditingField({});" class="new-field"
+    <v-button @click="startEditingField({})" class="new-field"
       >New Field</v-button
     >
 
@@ -114,7 +119,7 @@
         color="danger"
         :message="$t('delete_collection_are_you_sure')"
         :confirm-text="$t('delete')"
-        @cancel="confirmRemove = false;"
+        @cancel="confirmRemove = false"
         @confirm="remove"
       />
     </portal>
@@ -124,8 +129,8 @@
         color="danger"
         :message="$t('delete_field_are_you_sure', { field: fieldToBeRemoved })"
         :confirm-text="$t('delete')"
-        @cancel="confirmFieldRemove = false;"
-        @confirm="removeField(fieldToBeRemoved);"
+        @cancel="confirmFieldRemove = false"
+        @confirm="removeField(fieldToBeRemoved)"
       />
     </portal>
 
@@ -133,7 +138,7 @@
       v-if="editingField"
       :field-info="fieldBeingEdited"
       :collection-info="collectionInfo"
-      @close="editingField = false;"
+      @close="editingField = false"
       @save="setFieldSettings"
     />
 
@@ -141,7 +146,7 @@
       v-if="duplicatingField"
       :field-information="fieldBeingDuplicated"
       :collection-information="collectionInfo"
-      @close="duplicatingField = false;"
+      @close="duplicatingField = false"
       @save="duplicateFieldSettings"
     />
   </div>

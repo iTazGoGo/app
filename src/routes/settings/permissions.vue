@@ -17,9 +17,9 @@
           v-if="!isNew && !isSystem"
           :loading="removing"
           :label="$t('delete')"
-          icon="close"
+          icon="delete_outline"
           color="danger"
-          @click="confirmRemove = true;"
+          @click="confirmRemove = true"
         />
         <v-header-button
           :disabled="!editing"
@@ -57,7 +57,7 @@
         :message="$t('delete_role_are_you_sure', { name: role.name })"
         :confirm-text="$t('delete')"
         :loading="removing"
-        @cancel="confirmRemove = false;"
+        @cancel="confirmRemove = false"
         @confirm="remove"
       />
     </portal>

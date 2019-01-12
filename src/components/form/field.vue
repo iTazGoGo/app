@@ -18,7 +18,7 @@
                 <v-toggle
                   :value="!blocked"
                   @input="
-                    $emit(blocked ? 'activate' : 'deactivate', field.field);
+                    $emit(blocked ? 'activate' : 'deactivate', field.field)
                   "
                 />
               </label>
@@ -32,7 +32,7 @@
         <div class="field-wrapper">
           <v-ext-input
             :id="field.interface"
-            :name="field.field"
+            :name="name"
             :required="field.required === true || field.required === '1'"
             :readonly="readonly || blocked"
             :options="field.options"
@@ -50,7 +50,7 @@
                 : $emit('stage-value', {
                     field: field.field,
                     value: $event
-                  });
+                  })
             "
             @setfield="
               readonly
@@ -58,13 +58,13 @@
                 : $emit('stage-value', {
                     field: $event.field,
                     value: $event.value
-                  });
+                  })
             "
           />
           <div
             class="blocker"
             v-if="blocked"
-            @click="$emit('activate', field.field);"
+            @click="$emit('activate', field.field)"
           />
         </div>
       </div>
@@ -103,6 +103,10 @@ export default {
     newItem: {
       type: Boolean,
       default: false
+    },
+    name: {
+      type: String,
+      required: true
     }
   },
   computed: {
