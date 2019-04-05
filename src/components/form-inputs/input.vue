@@ -185,7 +185,6 @@ export default {
     color: var(--gray);
     padding: 10px;
     font-size: 1rem;
-    font-weight: 500;
     line-height: 1.5;
     text-transform: none;
     transition: var(--fast) var(--transition);
