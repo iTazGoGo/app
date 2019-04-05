@@ -140,7 +140,7 @@ export default {
 
 <style lang="scss" scoped>
 .heading {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 .field-wrapper {
   position: relative;
@@ -150,7 +150,7 @@ label,
 legend {
   text-transform: none;
   color: var(--darker-gray);
-  font-size: 1.143rem;
+  font-size: 16px;
   line-height: 1.1;
   font-weight: 400;
   text-overflow: ellipsis;
