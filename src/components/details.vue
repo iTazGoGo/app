@@ -33,9 +33,9 @@ export default {
   position: relative;
   width: 100%;
   margin-top: 10px;
-  border-top: 1px solid var(--lighter-gray);
-  padding-top: 30px;
-  margin-bottom: 60px;
+  border-top: 2px solid var(--lightest-gray);
+  padding-top: 40px;
+  margin-bottom: 80px;
 
   summary {
     font-size: 18px;
