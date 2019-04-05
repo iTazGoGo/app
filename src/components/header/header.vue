@@ -3,29 +3,26 @@
     <button :disabled="navActive" class="nav-toggle" @click="activateNav">
       <i class="material-icons">menu</i>
     </button>
-    <div class="title">
-      <h1 v-if="title">{{ title }}</h1>
-      <ol v-else class="breadcrumb">
+    <div class="title" :class="{ 'has-breadcrumb': navBreadcrumb }">
+      <ol class="breadcrumb" v-if="navBreadcrumb">
         <li
-          v-for="({ name, path, color = null }, index) in breadcrumb ||
-            defaultBreadcrumb"
+          v-for="{ name, path, color = null } in navBreadcrumb"
           :key="path"
+          class="breadcrumb-item"
         >
-          <template
-            v-if="index !== (breadcrumb || defaultBreadcrumb).length - 1"
+          <router-link
+            :to="path"
+            :style="{ color: color ? `var(--${color})` : null }"
           >
-            <router-link
-              :to="path"
-              :style="{ color: color ? `var(--${color})` : null }"
-              >{{ name }}</router-link
-            >
-          </template>
-          <h1 v-else :style="{ color: color ? `var(--${color})` : null }">
             {{ name }}
-          </h1>
+          </router-link>
         </li>
       </ol>
-      <slot name="title" />
+
+      <div class="flex">
+        <h1>{{ title || currentPage.name }}</h1>
+        <slot name="title" />
+      </div>
     </div>
     <slot />
     <v-header-button
@@ -87,6 +84,23 @@ export default {
     },
     navActive() {
       return this.$store.state.sidebars.nav;
+    },
+
+    // The last part of the breadcrumb, rendered as a bigger title
+    currentPage() {
+      const breadcrumb = this.breadcrumb || this.defaultBreadcrumb;
+      return breadcrumb[breadcrumb.length - 1];
+    },
+
+    // The parts of the breadcrumb that make up the navigation. Does not include the last item, as
+    // that's being returned by this.currentPage()
+    navBreadcrumb() {
+      const breadcrumb = this.breadcrumb || this.defaultBreadcrumb;
+      // We need to clone the array, otherwise the pop from below will modify the original passed
+      // in array
+      const breadcrumbClone = [...breadcrumb];
+      breadcrumbClone.pop();
+      return breadcrumbClone.length > 0 ? breadcrumbClone : null;
     }
   },
   methods: {
@@ -108,15 +122,19 @@ export default {
   right: 0;
   top: 0;
   height: 4.286rem;
-  color: var(--white);
+  color: var(--black);
   display: flex;
   align-items: center;
   z-index: 20;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 32px;
+  padding-right: 32px;
 
   @media (min-width: 800px) {
     padding-left: calc(var(--nav-sidebar-width) + 20px);
+  }
+
+  .title {
+    flex-grow: 1;
   }
 
   .nav-toggle {
@@ -137,49 +155,50 @@ export default {
     }
   }
 
-  .title {
-    color: var(--gray);
-    font-size: 1.38em;
-    line-height: 1.06;
-    font-weight: 400;
-    height: 20px;
-    flex-grow: 1;
-
-    > * {
-      display: inline-block;
-      vertical-align: baseline;
-    }
+  h1 {
+    color: var(--black);
+    font-size: 22px;
   }
 
   .breadcrumb {
+    color: var(--black);
     list-style: none;
     padding: 0;
 
     li {
       display: inline-block;
-      &:not(:last-child)::after {
-        content: "chevron_right";
-        font-family: "Material Icons";
-        color: var(--light-gray);
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0 5px;
-      }
     }
 
     a {
       text-decoration: none;
-      &:hover,
-      .user-is-tabbing &:focus {
-        color: var(--darker-gray);
-      }
+      color: var(--light-gray);
+      transition: color var(--fast) var(--transition);
+    }
+
+    a:hover {
+      color: var(--dark-gray);
     }
   }
 
-  h1.title,
-  .title h1 {
-    display: block;
-    color: var(--darker-gray);
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: "chevron_right";
+    color: var(--lighter-gray);
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 12px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    font-feature-settings: "liga";
+    vertical-align: middle;
+  }
+
+  .flex {
+    display: flex;
   }
 }
 
