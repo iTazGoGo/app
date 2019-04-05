@@ -83,7 +83,7 @@ export default {
 
 .wrapper {
   border-radius: 50%;
-  border: 2px solid var(--lighter-gray);;
+  border: 2px solid var(--lighter-gray);
   background-color: var(--white);
   height: 100%;
   width: 100%;

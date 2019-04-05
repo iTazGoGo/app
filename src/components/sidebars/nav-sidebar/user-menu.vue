@@ -221,7 +221,7 @@ export default {
     > i {
       position: absolute;
       right: -10px;
-      color: var(--light-gray);;
+      color: var(--light-gray);
     }
   }
   .warning {
@@ -260,7 +260,7 @@ export default {
 
   .sign-out:hover,
   .user-is-tabbing .sign-out:focus {
-    background-color: #DDE3E6; // rgba(var(--lighter-gray), 0.5);
+    background-color: #dde3e6; // rgba(var(--lighter-gray), 0.5);
     border-radius: var(--border-radius);
 
     .icon {

@@ -211,7 +211,6 @@ export default {
 .v-card {
   width: var(--width-small);
   border-radius: 3px;
-  box-shadow: var(--box-shadow);
   overflow: hidden;
   transition: box-shadow var(--fast) var(--transition);
   background-color: var(--white);

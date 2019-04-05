@@ -116,7 +116,7 @@ export default {
   margin: 20px 0 30px;
   padding: 0 5px 0 10px;
   position: relative;
-  background-color: #DDE3E6; // rgba(var(--lighter-gray), 0.5);
+  background-color: #dde3e6; // rgba(var(--lighter-gray), 0.5);
   border-radius: var(--border-radius);
 
   &.slow {
@@ -153,36 +153,36 @@ export default {
       color: var(--accent);
     }
 
-  svg {
-    fill: var(--darker-gray);
-  }
-
-  i {
-    color: var(--light-gray);
-  }
-
-  &.has-error {
-    > div {
-      svg {
-        fill: var(--red);
-      }
+    svg {
+      fill: var(--darker-gray);
     }
-    span {
-      color: var(--red);
-      + i {
+
+    i {
+      color: var(--light-gray);
+    }
+
+    &.has-error {
+      > div {
+        svg {
+          fill: var(--red);
+        }
+      }
+      span {
         color: var(--red);
+        + i {
+          color: var(--red);
+        }
       }
     }
   }
-}
 
-.icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 15px;
-  color: var(--light-gray);
-  fill: var(--light-gray);
-}
+  .icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 15px;
+    color: var(--light-gray);
+    fill: var(--light-gray);
+  }
 
   .icon {
     width: 15px;

@@ -91,7 +91,7 @@ svg {
 
 .bookmark button:first-child:hover,
 .user-menu button:hover {
-  background-color: #DDE3E6; // rgba(var(--lighter-gray), 0.5);
+  background-color: #dde3e6; // rgba(var(--lighter-gray), 0.5);
   border-radius: var(--border-radius);
 
   i,
@@ -131,7 +131,7 @@ nav:not(.no-border) {
     text-decoration: none;
 
     &:hover {
-      background-color: #DDE3E6; // rgba(var(--lighter-gray), 0.5);
+      background-color: #dde3e6; // rgba(var(--lighter-gray), 0.5);
       border-radius: var(--border-radius);
     }
   }

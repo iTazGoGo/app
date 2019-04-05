@@ -84,7 +84,7 @@ a {
 a:hover,
 .content .router-link-active,
 .user-menu .router-link-exact-active {
-  background-color: #DDE3E6; // rgba(var(--lighter-gray), 0.5);
+  background-color: #dde3e6; // rgba(var(--lighter-gray), 0.5);
   border-radius: var(--border-radius);
 
   .icon {
