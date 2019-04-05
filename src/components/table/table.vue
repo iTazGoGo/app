@@ -462,7 +462,7 @@ export default {
 .row {
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0;
   border-bottom: 2px solid var(--body-background);
   box-sizing: content-box;
 }
