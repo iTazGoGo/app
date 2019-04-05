@@ -107,7 +107,7 @@ export default {
     },
     color: {
       type: String,
-      default: "darkest-gray"
+      default: "lighter-gray"
     },
     src: {
       type: String,
@@ -270,6 +270,7 @@ export default {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      background-color: var(--white);
     }
 
     .icon {
@@ -365,10 +366,6 @@ export default {
     opacity: 0.5;
   }
 
-  .half-opacity {
-    opacity: 0.5;
-  }
-
   &.selectable {
     .select {
       transition: opacity var(--fast) var(--transition);
@@ -384,8 +381,8 @@ export default {
       opacity: 0;
       background-image: linear-gradient(
         -180deg,
-        #000000 4%,
-        rgba(0, 0, 0, 0) 100%
+        #263238 4%,
+        rgba(38, 50, 56, 0) 100%
       );
       transition: opacity var(--fast) var(--transition);
     }
