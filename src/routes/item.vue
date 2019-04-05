@@ -27,7 +27,8 @@
         <v-header-button
           v-if="!newItem && !singleItem && permission.delete !== 'none'"
           icon="delete_outline"
-          color="danger"
+          color="gray"
+          hover-color="danger"
           :label="$t('delete')"
           @click="confirmRemove = true"
         />

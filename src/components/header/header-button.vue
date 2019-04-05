@@ -13,9 +13,11 @@
       :is="disabled ? 'button' : to ? 'router-link' : 'button'"
       :style="{
         backgroundColor: noBackground || disabled ? null : `var(--${color})`,
-        color: `var(--${color})`
+        color: `var(--${color})`,
+        '--hover-color': hoverColor ? `var(--${hoverColor})` : null
       }"
-      :class="{ attention: alert, 'no-bg': noBackground }"
+      :class="{ attention: alert, 'no-bg': noBackground, 'has-bg': hoverColor }"
+      class="button"
       :disabled="disabled"
       :to="to || null"
       @click="!to ? $emit('click', $event) : null"
@@ -42,7 +44,11 @@ export default {
     },
     color: {
       type: String,
-      default: "darker-gray"
+      default: "gray"
+    },
+    hoverColor: {
+      type: String,
+      default: null
     },
     label: {
       type: String,
@@ -96,6 +102,14 @@ export default {
   margin-left: 20px;
 }
 
+.button {
+  transition: background-color var(--fast) var(--transition);
+}
+
+.button.has-bg:hover {
+  background-color: var(--hover-color) !important;
+}
+
 button,
 a {
   position: relative;
@@ -111,6 +125,7 @@ a {
   border-radius: 100%;
   overflow: hidden;
   cursor: pointer;
+  text-decoration: none;
 
   i {
     transition: 100ms var(--transition);
