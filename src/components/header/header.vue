@@ -245,6 +245,7 @@ body.info-wide-active .v-header {
 
   .flex {
     display: flex;
+    align-items: center;
   }
 
   .back {
