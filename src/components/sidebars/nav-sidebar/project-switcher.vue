@@ -111,7 +111,7 @@ export default {
   width: calc(100% + 40px);
   display: flex;
   align-items: center;
-  margin: 0 -20px 30px;
+  margin: 0 -20px 20px;
   padding: 0 30px;
   position: relative;
   background-color: #dde3e6; // rgba(var(--lighter-gray), 0.5);
