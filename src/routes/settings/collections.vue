@@ -1,6 +1,6 @@
 <template>
   <div class="collections">
-    <v-header :breadcrumb="breadcrumb">
+    <v-header :breadcrumb="breadcrumb" icon="box">
       <template slot="buttons">
         <v-header-button
           icon="add"

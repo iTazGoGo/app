@@ -3,6 +3,13 @@
     <button :disabled="navActive" class="nav-toggle" @click="activateNav">
       <i class="material-icons">menu</i>
     </button>
+    <v-header-button
+      class="back"
+      :icon="icon"
+      :to="iconLink"
+      color="lightest-gray"
+      icon-color="dark-gray"
+    />
     <div class="title" :class="{ 'has-breadcrumb': navBreadcrumb }">
       <ol class="breadcrumb" v-if="navBreadcrumb">
         <li
@@ -31,6 +38,7 @@
       icon="info"
       no-background
       @click="toggleInfo"
+      icon-color="lighter-gray"
     />
     <v-header-button
       v-if="infoToggle && itemDetail"
@@ -39,6 +47,7 @@
       no-background
       class="info-mobile"
       @click="toggleInfo"
+      icon-color="lighter-gray"
     />
     <slot name="buttons" />
   </header>
@@ -65,6 +74,15 @@ export default {
     itemDetail: {
       type: Boolean,
       default: false
+    },
+
+    icon: {
+      type: String,
+      default: "arrow_back"
+    },
+    iconLink: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -158,7 +176,7 @@ body.info-wide-active .v-header {
   padding-right: 32px;
 
   @media (min-width: 800px) {
-    padding-left: calc(var(--nav-sidebar-width) + 20px);
+    padding-left: calc(var(--nav-sidebar-width) + 32px);
   }
 
   .title {
@@ -227,6 +245,11 @@ body.info-wide-active .v-header {
 
   .flex {
     display: flex;
+  }
+
+  .back {
+    margin: 0 !important;
+    margin-right: 16px !important;
   }
 }
 

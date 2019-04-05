@@ -1,6 +1,6 @@
 <template>
   <div class="settings-roles">
-    <v-header :breadcrumb="breadcrumb">
+    <v-header :breadcrumb="breadcrumb" :icon-link="`/settings`">
       <template slot="buttons">
         <v-header-button
           icon="add"

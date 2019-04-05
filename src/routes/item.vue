@@ -13,7 +13,7 @@
   </div>
 
   <div v-else-if="fields === null">
-    <v-header />
+    <v-header :icon-link="`/collections`" />
     <v-loader area="content" />
   </div>
 
@@ -21,6 +21,7 @@
     <v-header
       :breadcrumb="breadcrumb"
       :info-toggle="!newItem && !batch && !activityDetail"
+      :icon-link="`/collections/${collection}`"
       item-detail
     >
       <template slot="buttons">

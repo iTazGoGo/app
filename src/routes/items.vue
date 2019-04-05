@@ -1,7 +1,12 @@
 <template>
   <v-not-found v-if="notFound" />
   <div class="route-item-listing" v-else>
-    <v-header info-toggle :item-detail="false" :breadcrumb="breadcrumb">
+    <v-header
+      info-toggle
+      :item-detail="false"
+      :breadcrumb="breadcrumb"
+      :icon="collectionInfo.icon || 'box'"
+    >
       <template slot="title">
         <button
           :class="currentBookmark ? 'active' : null"

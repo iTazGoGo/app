@@ -1,6 +1,6 @@
 <template>
   <div class="interfaces">
-    <v-header :breadcrumb="links" />
+    <v-header :breadcrumb="links" :icon-link="`/settings`" />
     <v-table
       :columns="columns"
       :items="items"

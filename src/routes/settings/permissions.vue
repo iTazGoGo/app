@@ -1,6 +1,6 @@
 <template>
   <div v-if="error">
-    <v-header />
+    <v-header :icon-link="`/settings`" />
     <v-error
       v-if="error"
       icon="error_outline"

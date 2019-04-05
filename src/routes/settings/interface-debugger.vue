@@ -1,6 +1,6 @@
 <template>
   <div class="interface-debugger">
-    <v-header :breadcrumb="links" />
+    <v-header :breadcrumb="links" :icon-link="`/settings`" />
 
     <label>Dummy Label</label>
 

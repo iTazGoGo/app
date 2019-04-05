@@ -1,6 +1,6 @@
 <template>
   <div class="settings-global">
-    <v-header :breadcrumb="links">
+    <v-header :breadcrumb="links" :icon-link="`/settings`">
       <template slot="buttons">
         <v-header-button
           :disabled="!editing"

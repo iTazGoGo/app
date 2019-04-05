@@ -1,7 +1,7 @@
 <template>
   <not-found v-if="!collectionInfo" />
   <div class="settings-fields" v-else>
-    <v-header :breadcrumb="breadcrumb">
+    <v-header :breadcrumb="breadcrumb" :icon-link="`/settings`">
       <template slot="buttons">
         <v-header-button
           icon="delete_outline"

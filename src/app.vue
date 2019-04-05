@@ -159,10 +159,11 @@ body.no-padding {
 }
 
 body.info-active {
-  padding-right: 220px;
+  padding-right: 316px;
 }
 
 body.info-active-wide {
+  padding-right: 316px;
 }
 </style>
 
