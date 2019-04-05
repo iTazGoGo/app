@@ -715,7 +715,7 @@ label.style-4 {
 }
 
 .bookmark {
-  margin-left: 10px;
+  margin-left: 5px;
   opacity: 0.4;
   transition: opacity var(--fast) var(--transition);
   position: relative;
@@ -727,7 +727,7 @@ label.style-4 {
   i {
     font-size: 24px;
     height: 20px;
-    transform: translateY(-3px); // Vertical alignment of icon
+    transform: translateY(-1px); // Vertical alignment of icon
   }
 }
 
