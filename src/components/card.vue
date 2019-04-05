@@ -65,7 +65,7 @@
           <component :is="titleElement" class="title" v-tooltip="title">{{
             title
           }}</component>
-          <p v-if="subtitle" class="subtitle style-4">{{ subtitle }}</p>
+          <p v-if="subtitle" class="subtitle">{{ subtitle }}</p>
           <p v-if="body" class="content">{{ body }}</p>
         </div>
         <v-popover placement="right-start" offset="2">
@@ -210,7 +210,6 @@ export default {
 <style lang="scss" scoped>
 .v-card {
   width: var(--width-small);
-  border-radius: 3px;
   overflow: hidden;
   transition: box-shadow var(--fast) var(--transition);
   background-color: var(--white);
@@ -224,12 +223,14 @@ export default {
 
   &:not(.disabled):hover,
   &:not(.disabled).selected {
-    box-shadow: var(--box-shadow-accent);
-    transform: translateY(-1px);
+    //
   }
 
   .header {
     height: var(--width-small);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--white);
+    overflow: hidden;
     display: grid;
     grid-template-columns: 1;
     grid-template-rows: 1;
@@ -309,11 +310,10 @@ export default {
   }
 
   .body {
-    padding: 10px;
+    padding-top: 8px;
     position: relative;
     display: flex;
     align-items: center;
-    border-top: 1px solid var(--lightest-gray);
 
     .main {
       position: relative;
@@ -343,6 +343,10 @@ export default {
 
   .title {
     margin-bottom: 2px;
+  }
+  .subtitle {
+    color: var(--light-gray);
+    font-size: 13px;
   }
 
   .content {
