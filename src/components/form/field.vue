@@ -178,7 +178,7 @@ p {
 small {
   order: 2;
   display: block;
-  margin-top: 4px;
+  margin-top: 8px;
   font-style: italic;
   font-size: 12px;
   line-height: 1.5em;
