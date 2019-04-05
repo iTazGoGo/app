@@ -24,7 +24,6 @@
               </label>
             </div>
           </template>
-          <small v-if="field.note" v-html="$helpers.snarkdown(field.note)" />
         </div>
         <div class="field-wrapper">
           <v-ext-input
@@ -61,6 +60,7 @@
           />
         </div>
       </div>
+      <small v-if="field.note" v-html="$helpers.snarkdown(field.note)" />
     </component>
   </div>
 </template>
