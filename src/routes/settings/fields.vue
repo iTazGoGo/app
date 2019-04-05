@@ -764,7 +764,7 @@ em.note {
   background-color: var(--warning);
   border-radius: var(--border-radius);
   color: var(--white);
-  padding: 3px 6px;
+  padding: 3px 6px 4px;
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 600;
