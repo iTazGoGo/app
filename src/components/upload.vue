@@ -8,6 +8,7 @@
       class="select"
       type="file"
       ref="select"
+      :accept="accept"
       :multiple="multiple"
       @change="filesChange($event.target.files)"
     />
@@ -25,6 +26,20 @@
         </p>
       </div>
       <div class="buttons">
+        <form class="embed-input" @submit.prevent="saveEmbed" v-if="embed">
+          <input
+            type="url"
+            :placeholder="$t('embed_placeholder')"
+            v-model="embedLink"
+          />
+          <button type="submit">Save</button>
+        </form>
+        <i
+          v-tooltip="$t('embed')"
+          @click="embed = !embed"
+          class="material-icons select"
+          >link</i
+        >
         <i
           v-tooltip="$t('select_from_device')"
           @click="$refs.select.click()"
@@ -71,6 +86,7 @@
       class="drop"
       type="file"
       ref="drop"
+      :accept="accept"
       :multiple="multiple"
       @click.prevent
       @change="filesChange($event.target.files)"
@@ -84,6 +100,9 @@ import filesize from "filesize";
 export default {
   name: "v-upload",
   props: {
+    accept: {
+      type: String
+    },
     multiple: {
       type: Boolean,
       default: true
@@ -99,10 +118,71 @@ export default {
   },
   data() {
     return {
-      files: {}
+      files: {},
+      embedLink: null,
+      embed: false
     };
   },
+  computed: {
+    acceptTypesList() {
+      if (this.accept) {
+        return this.accept.trim().split(/\s*,\s*/);
+      } else {
+        return [];
+      }
+    }
+  },
   methods: {
+    saveEmbed() {
+      const id = this.$helpers.shortid.generate();
+      const name = this.embedLink.substring(
+        this.embedLink.lastIndexOf("/") + 1
+      );
+      this.files = {
+        [id]: {
+          name,
+          size: null,
+          progress: 0,
+          type: null,
+          error: null
+        },
+        ...this.files
+      };
+      this.$api
+        .createItem("directus_files", {
+          data: this.embedLink
+        })
+        .then(res => res.data)
+        .then(data => {
+          const { filesize: size, type, title: name } = data;
+          this.files = {
+            [id]: {
+              name,
+              size,
+              progress: 100,
+              type,
+              error: null
+            },
+            ...this.files
+          };
+          return data;
+        })
+        .then(data => {
+          this.$emit("upload", {
+            ...this.files[id],
+            data
+          });
+        })
+        .then(() => (this.embed = false))
+        .then(() => (this.embedLink = null))
+        .catch(error => {
+          this.$events.emit("error", {
+            notify: this.$t("something_went_wrong_body"),
+            error
+          });
+        });
+    },
+
     filesChange(fileList) {
       if (!fileList || !fileList.length) return;
 
@@ -116,6 +196,17 @@ export default {
       if (size !== -1 && size > this.$store.state.serverInfo.maxUploadSize) {
         this.$events.emit("warning", {
           notify: this.$t("upload_exceeds_max_size", { filename: name })
+        });
+
+        return;
+      }
+
+      if (
+        this.acceptTypesList.length > 0 &&
+        !this.acceptTypesList.includes(type)
+      ) {
+        this.$events.emit("warning", {
+          notify: this.$t("file_type_not_accepted", { filename: name })
         });
 
         return;
@@ -152,8 +243,14 @@ export default {
         })
         .catch(error => {
           this.files[id].error = error;
+          let message;
+          if (error.message) {
+            message = error.message;
+          } else {
+            message = this.$t("something_went_wrong_body");
+          }
           this.$events.emit("error", {
-            notify: this.$t("something_went_wrong_body"),
+            notify: message,
             error
           });
         });
@@ -182,15 +279,54 @@ export default {
     position: absolute;
     top: 22px;
     right: 20px;
+    display: flex;
+    align-items: center;
+    height: 26px;
 
     > * {
-      display: inline-block;
       cursor: pointer;
       transition: color var(--fast) var(--transition);
       user-select: none;
+      margin-left: 10px;
 
       &:hover {
         transition: none;
+      }
+    }
+
+    .embed-input {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      input {
+        border-radius: var(--border-radius);
+        border: 1px solid var(--lighter-gray);
+        padding: 4px;
+        color: var(--dark-gray);
+
+        &::placeholder {
+          color: var(--lighter-gray);
+        }
+
+        padding-right: 40px;
+        width: 250px;
+      }
+
+      button {
+        width: 40px;
+        position: absolute;
+        right: 0;
+        height: 100%;
+        background-color: var(--light-gray);
+        border-top-right-radius: var(--border-radius);
+        border-bottom-right-radius: var(--border-radius);
+        color: var(--white);
+
+        &:hover {
+          background-color: var(--accent);
+          color: var(--white);
+        }
       }
     }
   }

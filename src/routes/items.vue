@@ -21,7 +21,7 @@
         v-show="selection && selection.length === 0 && !emptyCollection"
         :filters="filters"
         :search-query="searchQuery"
-        :field-names="fieldNames"
+        :field-names="filterableFieldNames"
         :placeholder="resultCopy"
         @filter="updatePreferences('filters', $event)"
         @search="updatePreferences('search_query', $event)"
@@ -240,6 +240,9 @@ export default {
     collection() {
       return this.$route.params.collection;
     },
+    collectionInfo() {
+      return this.$store.state.collections[this.collection];
+    },
     emptyCollection() {
       return (this.meta && this.meta.total_count === 0) || false;
     },
@@ -315,8 +318,10 @@ export default {
             count: this.$n(this.meta.total_count)
           });
     },
-    fieldNames() {
-      return this.fields.map(field => field.field);
+    filterableFieldNames() {
+      return this.fields
+        .filter(field => field.datatype)
+        .map(field => field.field);
     },
     layoutNames() {
       if (!this.$store.state.extensions.layouts) return {};
@@ -336,6 +341,21 @@ export default {
         ) || {}
       ).field;
     },
+
+    // Get the status name of the value that's marked as soft delete
+    // This will make the delete button update the item to the hidden status
+    // instead of deleting it completely from the database
+    softDeleteStatus() {
+      if (!this.collectionInfo.status_mapping) return null;
+
+      const statusKeys = Object.keys(this.collectionInfo.status_mapping);
+      const index = this.$lodash.findIndex(
+        Object.values(this.collectionInfo.status_mapping),
+        { soft_delete: true }
+      );
+      return statusKeys[index];
+    },
+
     userCreatedField() {
       if (!this.fields) return null;
 
@@ -539,11 +559,22 @@ export default {
       const id = this.$helpers.shortid.generate();
       this.$store.dispatch("loadingStart", { id });
 
-      this.$api
-        .deleteItems(
+      let request;
+
+      const itemKeys = this.selection.map(item => item[this.primaryKeyField]);
+
+      if (this.softDeleteStatus) {
+        request = this.$api.updateItem(this.collection, itemKeys.join(","), {
+          [this.statusField]: this.softDeleteStatus
+        });
+      } else {
+        request = this.$api.deleteItems(
           this.collection,
           this.selection.map(item => item[this.primaryKeyField])
-        )
+        );
+      }
+
+      request
         .then(() => {
           this.$store.dispatch("loadingFinished", id);
           this.$refs.listing.getItems();

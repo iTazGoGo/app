@@ -44,9 +44,9 @@
               <template v-if="tabs">
                 <div
                   v-for="(info, id) in tabs"
+                  v-show="activeTab === id"
                   :key="`tab-${id}`"
                   class="tab"
-                  v-if="activeTab === id"
                 >
                   <slot :name="id" />
                 </div>
@@ -212,9 +212,14 @@ export default {
   .body {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-    max-height: 70vh;
+    height: 70vh;
     position: relative;
     background-color: var(--body-background);
+
+    .tab {
+      height: 100%;
+      position: relative;
+    }
   }
 
   .footer {

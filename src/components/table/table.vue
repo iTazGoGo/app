@@ -133,6 +133,7 @@
               <v-ext-display
                 v-else-if="useInterfaces && !$lodash.isNil(row[field])"
                 :interface-type="fieldInfo.interface"
+                :id="field"
                 :name="field"
                 :type="fieldInfo.type"
                 :datatype="fieldInfo.datatype"
@@ -177,6 +178,7 @@
               <v-ext-display
                 v-else-if="useInterfaces && !$lodash.isNil(row[field])"
                 :interface-type="fieldInfo.interface"
+                :id="field"
                 :name="field"
                 :type="fieldInfo.type"
                 :options="fieldInfo.options"
@@ -295,7 +297,8 @@ export default {
           .map(field => this.widths[field])
           .reduce((acc, val) => acc + val, 0) +
         30 +
-        40
+        40 +
+        (this.manualSorting ? 38 : 0)
       );
     },
     itemsArray() {
@@ -394,7 +397,8 @@ export default {
       const widths = {};
 
       this.columns.forEach(({ field }) => {
-        widths[field] = (this.columnWidths && this.columnWidths[field]) || 200;
+        const width = (this.columnWidths && this.columnWidths[field]) || 200;
+        widths[field] = width > 0 ? width : 200;
       });
 
       this.widths = widths;

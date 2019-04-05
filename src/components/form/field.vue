@@ -24,14 +24,11 @@
               </label>
             </div>
           </template>
-          <small
-            v-if="!readonly && field.note"
-            v-html="$helpers.snarkdown(field.note)"
-          />
+          <small v-if="field.note" v-html="$helpers.snarkdown(field.note)" />
         </div>
         <div class="field-wrapper">
           <v-ext-input
-            :id="field.interface"
+            :id="field.interface || 'text-input'"
             :name="name"
             :required="field.required === true || field.required === '1'"
             :readonly="readonly || blocked"
@@ -45,20 +42,16 @@
             :length="field.length"
             :new-item="newItem"
             @input="
-              readonly
-                ? null
-                : $emit('stage-value', {
-                    field: field.field,
-                    value: $event
-                  })
+              $emit('stage-value', {
+                field: field.field,
+                value: $event
+              })
             "
             @setfield="
-              readonly
-                ? null
-                : $emit('stage-value', {
-                    field: $event.field,
-                    value: $event.value
-                  })
+              $emit('stage-value', {
+                field: $event.field,
+                value: $event.value
+              })
             "
           />
           <div
@@ -190,9 +183,6 @@ small {
   font-size: 12px;
   line-height: 1.5em;
   color: var(--light-gray);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .label {

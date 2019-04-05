@@ -3,7 +3,11 @@
     :class="{ 'icon-left': iconLeft, 'icon-right': iconRight }"
     class="v-input"
   >
+    <!-- Far from ideal, but it does the trick -->
+
     <input
+      v-if="mask"
+      v-mask="mask"
       ref="input"
       :class="{ charactercount }"
       :type="type"
@@ -24,6 +28,30 @@
       @keydown="$emit('keydown', $event)"
       @input="$emit('input', $event.target.value)"
     />
+
+    <input
+      v-else
+      ref="input"
+      :class="{ charactercount }"
+      :type="type"
+      :autocomplete="autocomplete"
+      :max="max"
+      :maxlength="maxlength"
+      :min="min"
+      :minlength="minlength"
+      :name="name"
+      :placeholder="placeholder"
+      :required="required"
+      :readonly="readonly || disabled"
+      :spellcheck="spellcheck"
+      :value="value"
+      :id="id"
+      :step="step"
+      @keyup="$emit('keyup', $event)"
+      @keydown="$emit('keydown', $event)"
+      @input="$emit('input', $event.target.value)"
+    />
+
     <i v-if="iconLeft" :class="iconLeftColor" class="material-icons">{{
       iconLeft
     }}</i>
@@ -126,6 +154,10 @@ export default {
     charactercount: {
       type: Boolean,
       default: false
+    },
+    mask: {
+      type: [String, Array, Boolean],
+      default: null
     }
   },
   computed: {

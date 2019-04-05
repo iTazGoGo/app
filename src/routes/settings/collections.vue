@@ -103,8 +103,6 @@
 </template>
 
 <script>
-import { defaultFull } from "../../store/modules/permissions/defaults";
-
 export default {
   name: "settings-collections",
   metaInfo() {
@@ -513,21 +511,25 @@ export default {
             // https://github.com/directus/api/issues/207
             fields: fieldsToDispatch
           });
-          this.$store.dispatch("addPermission", {
-            collection: this.newName,
-            permission: {
-              $create: defaultFull,
-              ...defaultFull
-            }
-          });
+          this.$store.dispatch("getPermissions");
           this.$router.push(`/settings/collections/${this.newName}`);
         })
         .catch(error => {
+          this.adding = false;
           this.$store.dispatch("loadingFinished", id);
-          this.$events.emit("error", {
-            notify: this.$t("something_went_wrong_body"),
-            error
-          });
+          if (error) {
+            // Use bit more descriptive error if possible
+            const errors = {
+              4: this.$t("collection_invalid_name")
+            };
+            this.$events.emit("error", {
+              notify:
+                error.code in errors
+                  ? errors[error.code]
+                  : this.$t("something_went_wrong_body"),
+              error
+            });
+          }
         });
     },
     toggleManage(collection) {
@@ -540,6 +542,15 @@ export default {
           })
           .then(() => {
             return this.$store.dispatch("getCollections");
+          })
+          .then(() => {
+            this.$notify({
+              title: this.$t("manage_started", {
+                collection: collection.collection
+              }),
+              color: "green",
+              iconMain: "check"
+            });
           })
           .catch(error => {
             this.$events.emit("error", {
@@ -558,6 +569,14 @@ export default {
           return this.$store.dispatch("getCollections");
         })
         .then(() => {
+          this.$notify({
+            title: this.$t("manage_stopped", {
+              collection: this.dontManage.collection
+            }),
+            color: "green",
+            iconMain: "check"
+          });
+
           this.dontManage = null;
         })
         .catch(error => {

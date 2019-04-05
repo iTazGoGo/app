@@ -7,7 +7,7 @@ import PortalVue from "portal-vue";
 import axios from "axios";
 import meta from "vue-meta";
 import en from "date-fns/locale/en/";
-import nl from "date-fns/locale/nl/";
+import VueTheMask from "vue-the-mask";
 
 import "./assets/global.scss";
 import "./assets/tooltip.scss";
@@ -25,8 +25,8 @@ import helpers from "./helpers";
 import notify from "./notifications";
 import events from "./events/";
 
-// Create a default config when the config file is missing. This allows the app
-// to work even when the configuration hasn't been set
+// Create a default config when the config file is missing.
+// This allows the app to work even when no configuration was set
 const defaultConfig = {
   api: {},
   allowOtherAPI: true,
@@ -55,10 +55,10 @@ Vue.use(VueTimeago, {
   name: "v-timeago",
   locale: "en-US",
   locales: {
-    en,
-    nl
+    en
   }
 });
+Vue.use(VueTheMask);
 Vue.use(meta);
 Vue.component("draggable", VueDraggable);
 

@@ -14,32 +14,42 @@
 
         <section class="content">
           <project-switcher />
-          <nav-menu
-            v-if="collections && collections.length > 0"
-            :title="$t('collections')"
-            :no-border="!bookmarks.length && !extensions"
-            :links="
-              collections.map(({ collection, icon }) => ({
-                path: `/collections/${collection}`,
-                name: $t(`collections-${collection}`),
-                icon
-              }))
-            "
-          />
-          <nav-menu
-            v-if="extensions"
-            :title="$t('extensions')"
-            :links="extensions"
-            :no-border="!bookmarks.length"
-          />
-          <nav-bookmarks :bookmarks="bookmarks" no-border />
+
+          <div v-for="(section, index) in navStructure" :key="section.id">
+            <nav-bookmarks
+              v-if="
+                section.include &&
+                  section.include === 'bookmarks' &&
+                  bookmarks.length > 0
+              "
+              :bookmarks="bookmarks"
+              :no-border="index + 1 === navStructure.length"
+            />
+            <nav-menu
+              v-else-if="section.include && section.include === 'collections'"
+              :title="$t('collections')"
+              :links="linksCollections"
+              :no-border="index + 1 === navStructure.length"
+            />
+            <nav-menu
+              v-else-if="section.include && section.include === 'extensions'"
+              :title="$t('extensions')"
+              :links="linksExtensions"
+              :no-border="index + 1 === navStructure.length"
+            />
+            <nav-menu
+              v-else
+              :title="section.title"
+              :links="section.links ? section.links : []"
+              :no-border="index + 1 === navStructure.length"
+            />
+          </div>
         </section>
         <user-menu />
       </aside>
     </transition>
   </div>
 </template>
-
 <script>
 import VLogo from "./logo.vue";
 import ProjectSwitcher from "./project-switcher.vue";
@@ -76,7 +86,10 @@ export default {
             collection.collection.startsWith("directus_") === false
         )
         .filter(collection => {
-          if (collection.status_mapping) {
+          if (
+            collection.status_mapping &&
+            this.permissions[collection.collection].statuses
+          ) {
             return this.$lodash.some(
               this.permissions[collection.collection].statuses,
               permission => permission.read !== "none"
@@ -86,16 +99,56 @@ export default {
           return this.permissions[collection.collection].read !== "none";
         });
     },
-    bookmarks() {
-      return this.$store.state.bookmarks;
-    },
     projectName() {
       return this.$store.state.auth.projectName;
     },
     active() {
       return this.$store.state.sidebars.nav;
     },
-    extensions() {
+    bookmarks() {
+      return this.$store.state.bookmarks;
+    },
+
+    // This is the default structure of the navigation pane
+    // By default it will list collections, bookmarks, and extensions
+    // This is the thing that will be overridden by the nav_override field
+    // in directus_roles
+    defaultNavStructure() {
+      return [
+        {
+          title: "$t:collections",
+          include: "collections"
+        },
+        {
+          title: "$t:bookmarks",
+          include: "bookmarks"
+        },
+        {
+          title: "$t:extensions",
+          include: "extensions"
+        }
+      ];
+    },
+
+    // The structure of the navigation. Will return the stored value for the role
+    // nav override or the default structure above if it isn't set
+    // It will also replace the `includes` with links for the actual sections
+    navStructure() {
+      const userRole = this.$store.state.currentUser.roles[0];
+      const navOverride = userRole.nav_override;
+
+      return navOverride || this.defaultNavStructure;
+    },
+
+    linksCollections() {
+      return this.collections.map(({ collection, icon }) => ({
+        path: `/collections/${collection}`,
+        name: this.$t(`collections-${collection}`),
+        icon
+      }));
+    },
+
+    linksExtensions() {
       const links = [];
       const pages = this.$store.state.extensions.pages;
 
@@ -107,7 +160,7 @@ export default {
         });
       });
 
-      return links.length ? links : null;
+      return links;
     }
   },
   methods: {

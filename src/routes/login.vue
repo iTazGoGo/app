@@ -212,10 +212,6 @@ export default {
     storeError() {
       return this.$store.state.auth.error;
     },
-    storeUrl() {
-      if (!this.$store.state.auth.url) return null;
-      return this.$store.state.auth.url + "/" + this.$store.state.auth.env;
-    },
     errorType() {
       if (!this.error && !this.SSOerror) return;
 
@@ -261,15 +257,16 @@ export default {
       return this.selectedUrl === "other";
     }
   },
+
   created() {
     this.checkUrl = this.$lodash.debounce(this.checkUrl, 300);
 
     if (this.url) {
       this.checkUrl();
     }
-
-    let lastUsedURL =
-      this.storeUrl || Object.keys(window.__DirectusConfig__.api)[0];
+    let lastUsedURL = this.$store.state.auth.url
+      ? this.$store.state.auth.url
+      : Object.keys(window.__DirectusConfig__.api)[0];
 
     // Check if the last used URL is still a valid option before using it
     if (
@@ -285,6 +282,18 @@ export default {
     if (this.url.endsWith("/") === false) this.url = this.url + "/";
 
     this.trySSOLogin();
+  },
+  beforeRouteEnter(to, from, next) {
+    if (to.query.project) {
+      return next(vm => {
+        vm.selectedUrl = "other";
+        vm.url = atob(to.query.project);
+      });
+    }
+    return next();
+  },
+  mounted() {
+    this.handleAutoFill();
   },
   watch: {
     url() {
@@ -310,6 +319,23 @@ export default {
     }
   },
   methods: {
+    handleAutoFill() {
+      var cls = "-webkit-autofill";
+      var el = this.$el.children[0].elements;
+      if (el.email.hasAttribute("class", cls)) {
+        el.email.className = "has-value";
+      }
+      if (el.password.hasAttribute("class", cls)) {
+        el.password.className = "has-value";
+      }
+      if (
+        el.email.className == "has-value" &&
+        el.password.className == "has-value" &&
+        el[3].hasAttribute("disabled")
+      ) {
+        el[3].removeAttribute("disabled");
+      }
+    },
     processForm() {
       if (this.resetMode) {
         this.loading = true;
@@ -320,9 +346,11 @@ export default {
           })
           .then(() => {
             this.loading = false;
-            this.$notification.confirm(
-              this.$t("password_reset_sent", { email: this.email })
-            );
+            this.$notify({
+              title: this.$t("password_reset_sent", { email: this.email }),
+              color: "green",
+              iconMain: "check"
+            });
           })
           .catch(error => {
             this.error = error;
@@ -482,7 +510,7 @@ export default {
         })
         .catch(error => {
           this.$events.emit("error", {
-            notify: this.$t("something_went_wrong_body"),
+            notify: error.response.data.error.message,
             error
           });
 

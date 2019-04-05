@@ -138,6 +138,7 @@
       v-if="editingField"
       :field-info="fieldBeingEdited"
       :collection-info="collectionInfo"
+      :saving="fieldSaving"
       @close="editingField = false"
       @save="setFieldSettings"
     />
@@ -191,6 +192,7 @@ export default {
         "many-to-one",
         "sort"
       ],
+      fieldSaving: false,
       saving: false,
       dragging: false,
 
@@ -369,6 +371,8 @@ export default {
         });
     },
     setFieldSettings({ fieldInfo, relation }) {
+      this.fieldSaving = true;
+
       const existingField = this.$store.state.collections[
         this.collection
       ].fields.hasOwnProperty(fieldInfo.field);
@@ -428,10 +432,7 @@ export default {
               iconMain: "check"
             });
 
-            this.$store.dispatch("updateField", {
-              collection: this.collection,
-              field: savedFieldInfo
-            });
+            this.$store.dispatch("getCollections");
           } else {
             this.fields = [...this.fields, savedFieldInfo];
 
@@ -443,10 +444,7 @@ export default {
               iconMain: "check"
             });
 
-            this.$store.dispatch("addField", {
-              collection: this.collection,
-              field: savedFieldInfo
-            });
+            this.$store.dispatch("getCollections");
           }
 
           if (relation) {
@@ -476,6 +474,9 @@ export default {
             notify: this.$t("something_went_wrong_body"),
             error
           });
+        })
+        .finally(() => {
+          this.fieldSaving = false;
         });
     },
     duplicateField(field) {

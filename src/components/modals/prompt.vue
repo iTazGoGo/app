@@ -91,12 +91,12 @@ export default {
       if (this.safe) {
         val = val
           .toString()
-          .toLowerCase()
           .replace(/\s+/g, "_") // Replace spaces with _
           .replace(/[^\w_]+/g, "") // Remove all non-word chars
           .replace(/__+/g, "_") // Replace multiple _ with single _
           .replace(/^_+/, "") // Trim _ from start of text
-          .replace(/_+$/, ""); // Trim _ from end of text
+          .replace(/_+$/, "") // Trim _ from end of text
+          .toLowerCase();
       }
 
       this.$emit("input", val);
