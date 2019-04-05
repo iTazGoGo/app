@@ -71,7 +71,7 @@ export default {
         return 30;
       }
 
-      return 40;
+      return 50;
     },
     sortVal() {
       let sortQuery =
