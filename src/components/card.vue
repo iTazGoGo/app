@@ -229,7 +229,6 @@ export default {
   .header {
     height: var(--width-small);
     border-radius: var(--border-radius);
-    border: 1px solid var(--white);
     overflow: hidden;
     display: grid;
     grid-template-columns: 1;
@@ -244,13 +243,18 @@ export default {
 
     .select {
       position: absolute;
-      top: 10px;
-      left: 10px;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
       color: var(--white);
       opacity: 0;
       transition: opacity var(--fast) var(--transition);
 
       i {
+        position: absolute;
+        top: 10px;
+        left: 10px;
         font-size: 20px;
       }
 
@@ -386,6 +390,13 @@ export default {
       transition: opacity var(--fast) var(--transition);
     }
 
+    &.selection-mode {
+      .select {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
     &:hover,
     &.selection-mode,
     &.selected {
@@ -399,7 +410,7 @@ export default {
       }
 
       .header::before {
-        opacity: 0.2;
+        opacity: 0.3;
       }
     }
 
