@@ -109,6 +109,6 @@ export default {
 
 <style lang="scss" scoped>
 .layout {
-  padding: 32px;
+  padding: 0 32px;
 }
 </style>

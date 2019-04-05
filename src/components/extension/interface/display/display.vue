@@ -130,11 +130,15 @@ export default {
 
       let component;
 
-      if (this.interfaceInfo.core) {
+      if (!this.interfaceInfo) {
+        component = VExtDisplayFallback;
+      }
+      else if (this.interfaceInfo.core) {
         component = import("@/interfaces/" +
           this.interfaceInfo.id +
           "/display.vue");
-      } else {
+      }
+      else {
         const filePath = `${this.$api.url}/${this.interfaceInfo.path.replace(
           "meta.json",
           "display.js"

@@ -203,10 +203,10 @@ export default {
   }
 
   header {
-    border-bottom: 1px solid var(--lightest-gray);
     position: sticky;
     top: 0;
     height: 60px;
+    background-color: var(--lightest-gray);
   }
 
   .body {
