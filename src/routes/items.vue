@@ -178,15 +178,15 @@ export default {
         ];
       }
 
-      const breadcrumb = [];
-
       if (this.collection.startsWith("directus_")) {
-        breadcrumb.push({
-          name: this.$helpers.formatTitle(this.collection.substr(9)),
-          path: `/${this.collection.substring(9)}`
-        });
+        return [
+          {
+            name: this.$helpers.formatTitle(this.collection.substr(9)),
+            path: `/${this.collection.substring(9)}`
+          }
+        ];
       } else {
-        breadcrumb.push(
+        return [
           {
             name: this.$t("collections"),
             path: "/collections"
@@ -195,10 +195,8 @@ export default {
             name: this.$t(`collections-${this.collection}`),
             path: `/collections/${this.collection}`
           }
-        );
+        ];
       }
-
-      return breadcrumb;
     },
     fields() {
       const fields = this.$store.state.collections[this.collection].fields;
@@ -708,26 +706,31 @@ export default {
 label.style-4 {
   padding-bottom: 5px;
 }
+
 .bookmark {
   margin-left: 10px;
   opacity: 0.4;
   transition: opacity var(--fast) var(--transition);
   position: relative;
+
   &:hover {
     opacity: 1;
   }
+
   i {
     font-size: 24px;
     height: 20px;
     transform: translateY(-3px); // Vertical alignment of icon
   }
 }
+
 .bookmark.active {
   opacity: 1;
   i {
     color: var(--accent);
   }
 }
+
 .bookmark-name {
   color: var(--accent);
   margin-left: 5px;
