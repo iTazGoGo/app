@@ -116,11 +116,11 @@ export default {
 
 <style lang="scss">
 body.info-active .v-header {
-  padding-right: 252px !important;
+  padding-right: 316px !important;
 }
 
 body.info-wide-active .v-header {
-  padding-right: 392px !important;
+  padding-right: 316px !important;
 }
 </style>
 

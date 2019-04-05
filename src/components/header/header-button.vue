@@ -7,7 +7,7 @@
           {{ display }}
         </option>
       </select>
-      <i class="material-icons">more_horiz</i>
+      <i class="material-icons">more_vert</i>
     </div>
     <component
       :is="disabled ? 'button' : to ? 'router-link' : 'button'"
@@ -180,12 +180,10 @@ button[disabled] {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 30%;
+  height: 100%;
   position: absolute;
   overflow: hidden;
-  top: 0;
-  left: 0;
+  right: -20px;
   z-index: +1;
 
   i {
