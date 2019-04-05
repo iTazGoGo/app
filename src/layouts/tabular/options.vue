@@ -126,9 +126,13 @@ label {
   align-items: center;
   justify-content: space-between;
   cursor: ns-resize;
+  padding: 2px 0;
 
   .checkbox {
     max-width: 125px;
+    label {
+      font-size: 14px;
+    }
   }
 
   i {
