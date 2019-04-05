@@ -15,35 +15,39 @@
         <section class="content">
           <project-switcher />
 
-          <div v-for="(section, index) in navStructure" :key="section.id">
+          <template v-for="section in navStructure">
             <nav-bookmarks
+              class="menu-section"
               v-if="
                 section.include &&
                   section.include === 'bookmarks' &&
                   bookmarks.length > 0
               "
               :bookmarks="bookmarks"
-              :no-border="index + 1 === navStructure.length"
+              :key="section.id"
             />
             <nav-menu
+              class="menu-section"
               v-else-if="section.include && section.include === 'collections'"
               :title="$t('collections')"
               :links="linksCollections"
-              :no-border="index + 1 === navStructure.length"
+              :key="section.id"
             />
             <nav-menu
+              class="menu-section"
               v-else-if="section.include && section.include === 'extensions'"
               :title="$t('extensions')"
               :links="linksExtensions"
-              :no-border="index + 1 === navStructure.length"
+              :key="section.id"
             />
             <nav-menu
+              class="menu-section"
               v-else
               :title="section.title"
               :links="section.links ? section.links : []"
-              :no-border="index + 1 === navStructure.length"
+              :key="section.id"
             />
-          </div>
+          </template>
         </section>
         <user-menu />
       </aside>
@@ -266,6 +270,10 @@ aside {
   @media (min-width: 800px) {
     box-shadow: 1px 0 0 0 var(--lightest-gray);
   }
+}
+
+.menu-section + .menu-section {
+  border-top: 2px solid var(--lighter-gray);
 }
 </style>
 

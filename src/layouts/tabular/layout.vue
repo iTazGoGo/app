@@ -1,25 +1,27 @@
 <template>
-  <v-table
-    ref="table"
-    :class="viewOptions.spacing"
-    :items="items"
-    :columns="columns"
-    :primary-key-field="primaryKeyField"
-    :selection="selection"
-    :sort-val="sortVal"
-    :row-height="rowHeight"
-    :loading="loading"
-    :lazy-loading="lazyLoading"
-    :column-widths="viewOptions.widths || {}"
-    :link="link"
-    :use-interfaces="true"
-    :manual-sort-field="sortField"
-    @sort="sort"
-    @widths="setWidths"
-    @select="$emit('select', $event)"
-    @scroll-end="$emit('next-page')"
-    @input="$emit('input', $event)"
-  ></v-table>
+  <div class="layout">
+    <v-table
+      ref="table"
+      :class="viewOptions.spacing"
+      :items="items"
+      :columns="columns"
+      :primary-key-field="primaryKeyField"
+      :selection="selection"
+      :sort-val="sortVal"
+      :row-height="rowHeight"
+      :loading="loading"
+      :lazy-loading="lazyLoading"
+      :column-widths="viewOptions.widths || {}"
+      :link="link"
+      :use-interfaces="true"
+      :manual-sort-field="sortField"
+      @sort="sort"
+      @widths="setWidths"
+      @select="$emit('select', $event)"
+      @scroll-end="$emit('next-page')"
+      @input="$emit('input', $event)"
+    ></v-table>
+  </div>
 </template>
 
 <script>
@@ -104,3 +106,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.layout {
+  padding: 32px;
+}
+</style>
