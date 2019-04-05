@@ -106,18 +106,14 @@ export default {
 
 <style lang="scss" scoped>
 .project-switcher > div {
-  height: calc(
-    var(--header-height) - 20px
-  ); /* Force border bottom to be aligned with listing headers */
-  width: 100%;
-  border-bottom: 1px solid var(--lightest-gray);
+  height: var(--header-height);
+  width: calc(100% + 40px);
   display: flex;
   align-items: center;
-  margin: 20px 0 30px;
-  padding: 0 5px 0 10px;
+  margin: 0 -20px 30px;
+  padding: 0 25px 0 25px;
   position: relative;
   background-color: #dde3e6; // rgba(var(--lighter-gray), 0.5);
-  border-radius: var(--border-radius);
 
   &.slow {
     color: var(--warning);
