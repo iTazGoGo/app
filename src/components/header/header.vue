@@ -1,5 +1,5 @@
 <template>
-  <header class="v-header">
+  <header class="v-header" :class="{ scrolled }">
     <button :disabled="navActive" class="nav-toggle" @click="activateNav">
       <i class="material-icons">menu</i>
     </button>
@@ -67,6 +67,11 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      scrolled: false
+    };
+  },
   computed: {
     defaultBreadcrumb() {
       const routeParts = this.$route.path.split("/").filter(name => name);
@@ -109,7 +114,20 @@ export default {
     },
     toggleInfo() {
       this.$store.commit(TOGGLE_INFO);
+    },
+
+    checkIfScrolled() {
+      const scrollPos = window.scrollY;
+      this.scrolled = scrollPos > 0;
     }
+  },
+
+  created() {
+    window.addEventListener("scroll", this.checkIfScrolled);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.checkIfScrolled);
   }
 };
 </script>
@@ -210,6 +228,11 @@ body.info-wide-active .v-header {
   .flex {
     display: flex;
   }
+}
+
+.scrolled {
+  border-bottom: 2px solid var(--lightest-gray);
+  height: calc(4.286rem + 2px);
 }
 
 .info-mobile {
