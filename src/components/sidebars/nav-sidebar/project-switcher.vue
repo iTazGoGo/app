@@ -17,7 +17,7 @@
       v-tooltip.left="{
         content:
           (!!$store.state.auth.url ? $store.state.auth.url : 'No connection') +
-          `<br>${$t('latency')}:${
+          `<br>${$t('latency')}: ${
             !!$store.state.auth.url
               ? $n(
                   Math.round(
