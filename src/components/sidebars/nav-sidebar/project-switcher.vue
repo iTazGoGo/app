@@ -121,28 +121,19 @@ export default {
   }
 
   &.slow {
-    color: var(--warning);
     svg {
       transition: color 0.25s ease-in-out, fill 0.25s ease-in-out;
     }
 
     &.slow {
-      color: var(--warning);
       svg {
         fill: var(--warning);
-      }
-      i {
-        color: var(--warning);
       }
     }
 
     &.disconnected {
-      color: var(--danger);
       svg {
         fill: var(--danger);
-      }
-      i {
-        color: var(--danger);
       }
     }
 
