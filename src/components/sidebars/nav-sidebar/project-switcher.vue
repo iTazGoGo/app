@@ -9,6 +9,7 @@
     }"
   >
     <div
+      class="content"
       :class="{
         slow: $store.getters.signalStrength === 1,
         disconnected: $store.getters.signalStrength === 0
@@ -34,7 +35,7 @@
         selectionName ? selectionName : $store.state.auth.projectName
       }}</span>
       <i v-if="Object.keys(urls).length > 1" class="material-icons chevron">
-        arrow_drop_down
+        expand_more
       </i>
       <select
         v-if="Object.keys(urls).length > 1"
@@ -111,9 +112,13 @@ export default {
   display: flex;
   align-items: center;
   margin: 0 -20px 30px;
-  padding: 0 25px 0 25px;
+  padding: 0 30px;
   position: relative;
   background-color: #dde3e6; // rgba(var(--lighter-gray), 0.5);
+
+  .content {
+    padding: 8px 0 8px 10px;
+  }
 
   &.slow {
     color: var(--warning);
@@ -173,17 +178,17 @@ export default {
   }
 
   .icon {
-    width: 18px;
-    height: 18px;
+    width: 21px;
+    height: 24px;
     margin-right: 15px;
     color: var(--light-gray);
     fill: var(--light-gray);
   }
 
-  .icon {
-    width: 15px;
-    height: 18px;
-    margin-right: 10px;
+  .chevron {
+    position: absolute;
+    right: 10px;
+    color: var(--light-gray);
   }
 
   select {

@@ -8,7 +8,7 @@
         class="avatar"
       />
       <span class="no-wrap">{{ fullName }}</span>
-      <i class="material-icons">more_vert</i>
+      <i class="material-icons">expand_more</i>
     </header>
     <div class="links">
       <nav-menu :links="firstLinks" />
@@ -172,24 +172,6 @@ export default {
   will-change: transform;
   background-color: var(--lightest-gray);
 
-  // &:before {
-  //   pointer-events: none;
-  //   content: "";
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 5px;
-  //   left: 0;
-  //   right: 0;
-  //   top: -4px;
-  //   opacity: 0;
-  //   transition: opacity var(--fast) var(--transition);
-  //   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
-  // }
-
-  @media (min-width: 800px) {
-    box-shadow: 1px 0 0 0 var(--lightest-gray);
-  }
-
   &:hover,
   .user-is-tabbing &:focus,
   .user-is-tabbing &:focus-within {
@@ -204,14 +186,14 @@ export default {
   header {
     position: sticky;
     top: 0;
-    background-color: var(--lightest-gray);
-    padding: 10px 10px 10px 0;
-    border-top: 2px solid var(--lighter-gray);
-    border-bottom: 2px solid var(--lighter-gray);
+    padding: 10px 20px;
     margin-bottom: 10px;
     z-index: +1;
     display: flex;
     align-items: center;
+    background-color: #DDE3E6;
+    margin-left: -20px;
+    margin-right: -20px;
 
     .avatar {
       margin-right: 10px;
@@ -220,7 +202,7 @@ export default {
 
     > i {
       position: absolute;
-      right: -10px;
+      right: 10px;
       color: var(--light-gray);
     }
   }
