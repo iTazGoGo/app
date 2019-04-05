@@ -205,7 +205,6 @@ export default {
 
     &::placeholder {
       color: var(--lighter-gray);
-      font-weight: 500;
     }
 
     &:hover:not(:read-only) {
