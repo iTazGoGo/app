@@ -80,7 +80,7 @@ export default {
   }
 
   @media (min-width: 800px) {
-    max-width: var(--nav-sidebar-width);
+    max-width: var(--info-sidebar-width);
 
     &.wide {
       max-width: var(--info-sidebar-width);
