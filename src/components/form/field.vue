@@ -180,8 +180,6 @@ small {
   display: block;
   margin-top: 8px;
   font-style: italic;
-  font-size: 12px;
-  line-height: 1.5em;
   color: var(--light-gray);
 }
 
