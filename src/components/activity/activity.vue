@@ -27,14 +27,7 @@
       class="activity-item"
       :key="activity.id"
     >
-      <i
-        v-if="activity.action && activity.action.toLowerCase() === 'comment'"
-        v-tooltip="$t('comment')"
-        class="material-icons"
-        >message</i
-      >
       <span
-        v-else
         v-tooltip="$helpers.formatTitle(activity.action)"
         :class="activity.action"
         class="indicator"
@@ -264,10 +257,11 @@ export default {
   &::before {
     content: "";
     position: absolute;
-    left: 6px;
-    height: 100%;
-    width: 1px;
-    background-color: var(--lightest-gray);
+    left: 5px;
+    top: 80px;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--lighter-gray);
     z-index: -1;
   }
 
@@ -279,8 +273,8 @@ export default {
     height: 13px;
     border-radius: 50%;
     border: 2px solid;
-    background-color: var(--white);
-    box-shadow: 0 0 0 5px var(--white);
+    background-color: var(--lightest-gray);
+    box-shadow: 0 0 0 5px var(--lightest-gray);
     flex-shrink: 0;
 
     &.update {
@@ -302,10 +296,10 @@ export default {
 
   i.material-icons {
     width: 13px;
-    background-color: var(--white);
     font-size: 24px;
     transform: translateX(-6px);
     height: 20px;
+    background-color: var(--lightest-gray);
     color: var(--lighter-gray);
   }
 
@@ -372,7 +366,7 @@ export default {
         width: auto;
         height: auto;
         transform: translateX(0);
-        background-color: inherit;
+        // background-color: inherit;
         font-size: 24px;
         color: var(--gray);
       }
@@ -380,7 +374,7 @@ export default {
 
     .comment {
       position: relative;
-      background-color: var(--lightest-gray);
+      background-color: var(--white);
       color: var(--light-gray);
       border-radius: var(--border-radius);
       padding: 8px 10px;
@@ -461,7 +455,6 @@ export default {
   .textarea {
     height: 100%;
     resize: none;
-    box-shadow: 0px 5px 0px 0px rgba(255, 255, 255, 1);
   }
 
   button {
