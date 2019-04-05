@@ -68,8 +68,7 @@ export default {
   z-index: 10;
   transition: var(--slow) var(--transition-out);
   width: 90%;
-  background-color: var(--white);
-  border-left: 1px solid var(--lightest-gray);
+  background-color: var(--lightest-gray);
   padding: 20px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
