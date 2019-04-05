@@ -1,9 +1,6 @@
 <template>
   <div class="nav-bookmarks">
-    <nav
-      v-if="bookmarks && bookmarks.length > 0"
-      :class="{ 'no-border': noBorder }"
-    >
+    <nav v-if="bookmarks && bookmarks.length > 0">
       <ul>
         <li v-for="bookmark in bookmarks" :key="bookmark.id" class="bookmark">
           <router-link
@@ -42,10 +39,6 @@ export default {
     bookmarks: {
       type: Array,
       required: true
-    },
-    noBorder: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
@@ -109,12 +102,6 @@ ul {
 nav > ul > li > * {
   padding: 11px 0 11px 10px;
   margin: 2px 0;
-}
-
-nav:not(.no-border) {
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  border-bottom: 2px solid var(--lighter-gray);
 }
 
 .bookmark {

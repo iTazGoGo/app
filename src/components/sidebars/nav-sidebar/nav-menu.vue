@@ -1,6 +1,6 @@
 <template>
   <div class="nav-menu" v-if="links.length > 0">
-    <nav :class="{ 'no-border': noBorder }">
+    <nav>
       <ul>
         <li v-for="{ path, name, target, icon, color } in links" :key="path">
           <div v-if="path.startsWith('http')" :class="color || null">
@@ -42,10 +42,6 @@ export default {
     links: {
       type: Array,
       required: true
-    },
-    noBorder: {
-      type: Boolean,
-      default: false
     }
   }
 };
@@ -113,11 +109,6 @@ nav > ul > li > * {
 nav {
   padding-bottom: 10px;
   margin-bottom: 10px;
-  border-bottom: 2px solid var(--lighter-gray);
-
-  &.no-border {
-    border-bottom: 0;
-  }
 }
 
 .success {

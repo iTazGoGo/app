@@ -179,7 +179,7 @@ export default {
     z-index: +1;
     display: flex;
     align-items: center;
-    background-color: #DDE3E6;
+    background-color: #dde3e6;
     margin-left: -20px;
     margin-right: -20px;
 
