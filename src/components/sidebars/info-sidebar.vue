@@ -6,22 +6,8 @@
       @click="disableSidebar"
       class="blocker-info"
     />
-    <transition name="info">
-      <aside
-        class="info-sidebar"
-        v-if="active && !itemDetail"
-        :class="{ wide }"
-      >
-        <div class="system"><slot name="system" /></div>
-        <slot />
-      </aside>
-    </transition>
-
-    <aside
-      class="info-sidebar"
-      v-if="itemDetail"
-      :class="[{ wide, 'hide-when-small': !active }, 'info-leave-active']"
-    >
+    <aside class="info-sidebar" v-if="active" :class="{ wide }">
+      <div class="system"><slot name="system" /></div>
       <slot />
     </aside>
   </div>
@@ -55,6 +41,11 @@ export default {
     disableSidebar() {
       this.$store.commit(TOGGLE_INFO, false);
     }
+  },
+  created() {
+    if (this.itemDetail && window.innerWidth > 1235) {
+      this.$store.commit(TOGGLE_INFO, true);
+    }
   }
 };
 </script>
@@ -63,9 +54,9 @@ export default {
 .info-sidebar {
   position: fixed;
   right: 0;
-  bottom: 0;
-  height: calc(100% - var(--header-height));
-  z-index: 10;
+  top: 0;
+  height: 100%;
+  z-index: 30;
   transition: var(--slow) var(--transition-out);
   width: 90%;
   background-color: var(--lightest-gray);
@@ -104,16 +95,6 @@ export default {
 .blocker-info {
   @media (min-width: 1235px) {
     display: none;
-  }
-}
-
-.hide-when-small {
-  visibility: hidden;
-  transform: translateX(100%);
-
-  @media (min-width: 1235px) {
-    visibility: visible;
-    transform: initial;
   }
 }
 </style>

@@ -114,6 +114,16 @@ export default {
 };
 </script>
 
+<style lang="scss">
+body.info-active .v-header {
+  padding-right: 252px !important;
+}
+
+body.info-wide-active .v-header {
+  padding-right: 392px !important;
+}
+</style>
+
 <style scoped lang="scss">
 .v-header {
   background-color: var(--white);
