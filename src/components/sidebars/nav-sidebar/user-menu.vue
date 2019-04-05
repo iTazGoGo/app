@@ -11,9 +11,7 @@
       <i class="material-icons">expand_more</i>
     </header>
     <div class="links">
-      <nav-menu :links="firstLinks" />
-      <nav-menu :links="secondLinks" />
-      <nav-menu :links="thirdLinks" />
+      <nav-menu :links="userLinks" />
       <button class="sign-out" @click="confirmSignOut = true">
         <i class="material-icons icon">exit_to_app</i> {{ $t("sign_out") }}
       </button>
@@ -80,7 +78,7 @@ export default {
     permissions() {
       return this.$store.state.permissions;
     },
-    firstLinks() {
+    userLinks() {
       const links = [];
 
       if (this.$store.state.currentUser.admin === true) {
@@ -99,11 +97,6 @@ export default {
         target: "_blank",
         icon: "help"
       });
-
-      return links;
-    },
-    secondLinks() {
-      const links = [];
 
       if (this.permissions.directus_files.read !== "none") {
         links.push({
@@ -125,11 +118,6 @@ export default {
           icon: "person"
         });
       }
-
-      return links;
-    },
-    thirdLinks() {
-      const links = [];
 
       if (this.permissions.directus_activity.read !== "none") {
         links.push({
