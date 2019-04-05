@@ -39,9 +39,9 @@
             activity.action !== 'external' && activity.changes && activity.name
           "
         >
-          <summary class="title"
-            >{{ activity.name }}<span v-if="activity.date">•</span
-            ><v-timeago
+          <summary class="title">
+            <span class="name">{{ activity.name }}</span>
+            <v-timeago
               v-if="activity.date"
               v-tooltip="{
                 content: $d(activity.date, 'long'),
@@ -69,8 +69,8 @@
           </div>
         </details>
         <div class="title" v-else-if="activity.name">
-          {{ activity.name }}<span v-if="activity.date">•</span
-          ><v-timeago
+          <span class="name">{{ activity.name }}</span>
+          <v-timeago
             v-if="activity.date"
             v-tooltip="{
               content: $d(activity.date, 'long'),
@@ -267,13 +267,13 @@ export default {
 
   .indicator {
     position: relative;
-    top: 1px;
+    top: 4px;
     display: inline-block;
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: var(--gray);
-    box-shadow: 0 0 0 5px var(--lightest-gray);
+    background-color: var(--lighter-gray);
+    // box-shadow: 0 0 0 5px var(--lightest-gray);
     flex-shrink: 0;
 
     &.update {
@@ -286,7 +286,7 @@ export default {
       background-color: var(--success);
     }
     &.external {
-      background-color: var(--gray);
+      background-color: var(--lighter-gray);
     }
     &.upload {
       background-color: var(--purple-500);
@@ -311,20 +311,21 @@ export default {
     margin-left: 10px;
     flex-grow: 1;
 
+    .name {
+      font-weight: 500;
+      color: var(--darkest-gray);
+    }
+
+    .date {
+      color: var(--light-gray);
+      margin-left: 8px;
+    }
+
     .title {
       list-style-type: none;
 
       &::-webkit-details-marker {
         display: none;
-      }
-
-      span,
-      .date {
-        color: var(--light-gray);
-      }
-
-      span {
-        margin: 0 5px;
       }
     }
 
