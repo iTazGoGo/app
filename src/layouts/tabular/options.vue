@@ -20,7 +20,7 @@
     <label for="spacing" class="style-3">Spacing</label>
     <v-select
       id="spacing"
-      :value="viewOptions.spacing || 'cozy'"
+      :value="viewOptions.spacing || 'comfortable'"
       :options="{
         compact: 'Compact',
         cozy: 'Cozy',

@@ -257,7 +257,7 @@ export default {
   &::before {
     content: "";
     position: absolute;
-    left: 5px;
+    left: 4px;
     top: 80px;
     bottom: 0;
     width: 2px;
@@ -269,28 +269,27 @@ export default {
     position: relative;
     top: 1px;
     display: inline-block;
-    width: 13px;
-    height: 13px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    border: 2px solid;
-    background-color: var(--lightest-gray);
+    background-color: var(--gray);
     box-shadow: 0 0 0 5px var(--lightest-gray);
     flex-shrink: 0;
 
     &.update {
-      border-color: var(--action);
+      background-color: var(--action);
     }
     &.delete {
-      border-color: var(--danger);
+      background-color: var(--danger);
     }
     &.add {
-      border-color: var(--success);
+      background-color: var(--success);
     }
     &.external {
-      border-color: var(--gray);
+      background-color: var(--gray);
     }
     &.upload {
-      border-color: var(--purple-500);
+      background-color: var(--purple-500);
     }
   }
 

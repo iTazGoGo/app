@@ -237,6 +237,7 @@ export default {
   color: var(--darkest-gray);
   transform-origin: top;
   box-shadow: var(--box-shadow);
+  border: 2px solid var(--lighter-gray);
 
   @media (min-width: 800px) {
     left: var(--nav-sidebar-width);
@@ -374,7 +375,7 @@ export default {
 
       &:focus {
         color: var(--darker-gray);
-        border-color: var(--darker-gray);
+        border-color: var(--gray);
         outline: 0;
       }
 

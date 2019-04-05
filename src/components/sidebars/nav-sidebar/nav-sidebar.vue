@@ -266,10 +266,6 @@ aside {
   height: calc(100% - var(--header-height) - var(--header-height));
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-
-  @media (min-width: 800px) {
-    box-shadow: 1px 0 0 0 var(--lightest-gray);
-  }
 }
 
 .menu-section + .menu-section {

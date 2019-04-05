@@ -463,7 +463,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 0;
-  border-bottom: 2px solid var(--body-background);
+  border-bottom: 2px solid var(--off-white);
   box-sizing: content-box;
 }
 
