@@ -64,7 +64,7 @@ export default {
   },
   computed: {
     ...mapState({
-      color: state => state.settings.values.color || "light-blue-600"
+      color: state => state.settings.values.color || "darkest-gray"
     }),
     publicRoute() {
       return this.$route.meta.publicRoute || false;
