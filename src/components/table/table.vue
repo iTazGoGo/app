@@ -469,7 +469,7 @@ export default {
 
 .toolbar {
   position: sticky;
-  height: var(--header-height);
+  height: 48px;
   left: 0;
   top: 0;
   z-index: +1;
