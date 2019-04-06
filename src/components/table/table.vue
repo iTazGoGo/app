@@ -476,6 +476,7 @@ export default {
   background-color: var(--white);
   border-color: var(--lightest-gray);
   transition: box-shadow var(--fast) var(--transition-out);
+  padding-top: 12px;
 
   &.shadow {
     box-shadow: var(--box-shadow);
