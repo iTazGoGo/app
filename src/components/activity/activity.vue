@@ -366,7 +366,7 @@ export default {
         width: auto;
         height: auto;
         transform: translateX(0);
-        // background-color: inherit;
+        background-color: inherit;
         font-size: 24px;
         color: var(--gray);
       }
