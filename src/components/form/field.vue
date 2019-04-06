@@ -7,11 +7,12 @@
             <div class="label">
               <component :is="fieldset ? 'legend' : 'label'" :for="field.field">
                 {{ field.name || $helpers.formatTitle(field.field)
-                }}<i
+                }}<span
                   v-tooltip="$t('required')"
-                  class="material-icons"
-                  v-if="field.required === true || field.required === '1'"
-                  >star</i
+                  class="optional"
+                  v-if="field.required !== true || field.required === '0'"
+                >
+                  — Optional</span
                 >
               </component>
               <label v-if="batchMode" class="batch-label">
@@ -194,6 +195,10 @@ small {
     &:first-child {
       margin-right: 10px;
     }
+  }
+
+  .optional {
+    color: var(--lighter-gray);
   }
 
   i {
