@@ -310,7 +310,7 @@ export default {
     cursor: not-allowed;
 
     & .header {
-      background-color: var(--dark-gray) !important;
+      background-color: var(--lighter-gray) !important;
     }
   }
 
