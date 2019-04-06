@@ -60,7 +60,7 @@ export default {
     },
     rowHeight() {
       if (this.viewOptions.spacing === "comfortable") {
-        return 50;
+        return 48;
       }
 
       if (this.viewOptions.spacing === "cozy") {
@@ -68,10 +68,10 @@ export default {
       }
 
       if (this.viewOptions.spacing === "compact") {
-        return 30;
+        return 32;
       }
 
-      return 50;
+      return 48;
     },
     sortVal() {
       let sortQuery =
