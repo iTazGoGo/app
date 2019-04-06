@@ -66,7 +66,7 @@ export default {
       -webkit-font-feature-settings: "liga";
       -webkit-font-smoothing: antialiased;
       transition: var(--fast) var(--transition);
-      width: 24px;
+      width: 28px;
       height: 24px;
       margin-left: 6px;
       margin-top: 2px;
@@ -87,24 +87,21 @@ export default {
   }
 
   &.group {
-    padding: 0px 20px;
+    padding: 0px;
     border: none;
-    border-top: 1px solid var(--lighter-gray);
-    border-radius: 3px;
+    border-top: 2px solid var(--lightest-gray);
 
-    &[open] {
-      padding: 20px;
-      border: 1px solid var(--lighter-gray);
-    }
+    // &[open] {
+    //   padding: 20px 0;
+    // }
 
     .content {
-      padding-top: 10px;
+      padding-top: 32px;
     }
 
     summary {
       border: 0;
       margin-bottom: 0;
-      padding-left: 10px;
     }
   }
 
