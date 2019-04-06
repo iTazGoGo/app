@@ -642,7 +642,7 @@ h2 {
     font-size: 10px;
     text-transform: uppercase;
     font-weight: 700;
-    border-bottom: 1px solid var(--lightest-gray);
+    border-bottom: 2px solid var(--lightest-gray);
     height: 60px;
     .row {
       height: 60px;
@@ -692,8 +692,8 @@ h2 {
     .row {
       cursor: pointer;
       position: relative;
-      height: 40px;
-      border-bottom: 1px solid var(--lightest-gray);
+      height: 48px;
+      border-bottom: 2px solid var(--off-white);
 
       &:last-of-type {
         border-bottom: none;
@@ -799,7 +799,7 @@ label.label {
     display: flex;
     align-items: center;
     padding: 5px;
-    color: var(--darker-gray);
+    color: var(--gray);
     width: 100%;
     height: 100%;
     transition: color var(--fast) var(--transition);
@@ -811,10 +811,10 @@ label.label {
       }
     }
     &:not(:disabled):not(&[disabled]):hover {
-      color: var(--accent);
+      color: var(--darkest-gray);
       transition: none;
       i {
-        color: var(--accent);
+        color: var(--darkest-gray);
         transition: none;
       }
     }
