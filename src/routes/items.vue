@@ -19,7 +19,7 @@
           </i>
         </button>
         <div v-if="currentBookmark" class="bookmark-name no-wrap">
-          ({{ currentBookmark.title }})
+          {{ currentBookmark.title }}
         </div>
       </template>
       <v-search-filter
@@ -742,7 +742,7 @@ label.style-4 {
   color: var(--accent);
   margin-left: 5px;
   margin-top: 3px;
-  font-size: 0.67em;
+  font-size: 12px;
   line-height: 1.1;
   font-weight: 700;
   text-transform: uppercase;
