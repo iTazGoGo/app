@@ -491,7 +491,6 @@
           :key="optionID"
         >
           <label :for="optionID">{{ option.name }}</label>
-          <p class="note" v-html="$helpers.snarkdown(option.comment || '')" />
           <v-ext-input
             :id="option.interface"
             :name="optionID"
@@ -506,6 +505,7 @@
             :values="options"
             @input="$set(options, optionID, $event)"
           />
+          <p class="note" v-html="$helpers.snarkdown(option.comment || '')" />
         </div>
 
         <details
@@ -520,7 +520,6 @@
             :key="optionID"
           >
             <label :for="optionID">{{ option.name }}</label>
-            <p v-html="$helpers.snarkdown(option.comment || '')" class="note" />
             <v-ext-input
               :id="option.interface"
               :name="optionID"
@@ -535,6 +534,7 @@
               :values="options"
               @input="$set(options, optionID, $event)"
             />
+            <p v-html="$helpers.snarkdown(option.comment || '')" class="note" />
           </div>
         </details>
       </form>
@@ -1530,7 +1530,7 @@ export default {
 }
 
 p {
-  line-height: 2;
+  line-height: 1.3;
   max-width: 70%;
   &.subtext {
     max-width: 460px;
@@ -1563,7 +1563,6 @@ p {
   article {
     display: block;
     background-color: var(--white);
-    border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     flex-basis: 160px;
     flex-shrink: 0;
@@ -1573,6 +1572,7 @@ p {
 
     .header {
       background-color: var(--lighter-gray);
+      border-radius: var(--border-radius);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1587,31 +1587,29 @@ p {
 
     &.active {
       .header {
-        background-color: var(--accent);
+        background-color: var(--darkest-gray);
         transition: background-color var(--fast) var(--transition-in);
       }
     }
 
+    &:hover {
+      .header {
+        background-color: var(--gray);
+      }
+    }
+
     .body {
-      padding: 10px;
+      padding-top: 8px;
     }
 
     h2 {
       margin: 0;
-      font-size: 13px;
+      // font-size: 14px;
     }
 
     p {
-      text-transform: uppercase;
-      font-weight: 700;
       color: var(--lighter-gray);
-      font-size: 11px;
-    }
-
-    &:hover {
-      box-shadow: var(--box-shadow-accent);
-      transform: translateY(-1px);
-      transition: box-shadow var(--fast) var(--transition-in);
+      font-size: 13px;
     }
   }
 }
@@ -1630,13 +1628,12 @@ form.schema {
 
   .name-input {
     font-family: "Roboto Mono", monospace;
-    font-weight: 600;
   }
 
   .advanced-form,
   .name {
     display: grid;
-    grid-gap: 30px 20px;
+    grid-gap: 32px 32px;
     grid-template-columns: 1fr 1fr;
 
     .description {
@@ -1673,6 +1670,9 @@ form.schema {
 }
 
 form.options {
+  label {
+    margin-bottom: 8px;
+  }
   div.options {
     margin-bottom: 30px;
     &:last-of-type {
@@ -1684,7 +1684,7 @@ form.options {
 details {
   position: relative;
   margin-top: 60px;
-  border-top: 1px solid var(--lighter-gray);
+  border-top: 2px solid var(--lightest-gray);
   padding-top: 40px;
   summary {
     position: absolute;
