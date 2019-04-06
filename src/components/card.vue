@@ -399,7 +399,7 @@ export default {
     &.selected {
       .select {
         transition: none;
-        opacity: 0.5;
+        opacity: 0.7;
 
         &:hover {
           opacity: 1;
@@ -407,7 +407,7 @@ export default {
       }
 
       .header::before {
-        opacity: 0.3;
+        opacity: 0.2;
       }
     }
 
