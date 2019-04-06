@@ -270,7 +270,7 @@ aside {
 
 .menu-section + .menu-section {
   border-top: 2px solid var(--lighter-gray);
-  padding-top: 11px;
+  padding-top: 20px;
 }
 </style>
 
