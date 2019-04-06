@@ -225,7 +225,7 @@ export default {
   button.sign-out {
     width: 100%;
     text-align: left;
-    padding: 11px 0 11px 10px;
+    padding: 8px 0 8px 10px;
   }
 
   .sign-out:hover,
