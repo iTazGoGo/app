@@ -20,9 +20,8 @@
           <router-link
             :to="path"
             :style="{ color: color ? `var(--${color})` : null }"
+            >{{ name }}</router-link
           >
-            {{ name }}
-          </router-link>
         </li>
       </ol>
 
@@ -202,12 +201,11 @@ body.info-wide-active .v-header {
   }
 
   h1 {
-    color: var(--black);
+    color: var(--darker-gray);
     font-size: 22px;
   }
 
   .breadcrumb {
-    color: var(--black);
     list-style: none;
     padding: 0;
 
@@ -232,15 +230,16 @@ body.info-wide-active .v-header {
     font-family: "Material Icons";
     font-weight: normal;
     font-style: normal;
-    font-size: 12px;
+    font-size: 18px;
     display: inline-block;
+    margin: 0 8px;
     line-height: 1;
     text-transform: none;
     letter-spacing: normal;
     word-wrap: normal;
     white-space: nowrap;
     font-feature-settings: "liga";
-    vertical-align: middle;
+    vertical-align: bottom;
   }
 
   .flex {
