@@ -657,7 +657,7 @@ export default {
 
 @keyframes bounce {
   from {
-    border-color: var(--lighter-gray);
+    border-color: var(--off-white);
   }
 
   to {
