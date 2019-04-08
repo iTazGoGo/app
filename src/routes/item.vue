@@ -59,7 +59,9 @@
           :disabled="!editing"
           :loading="saving"
           :label="$t('save')"
-          :options="{
+          :options="!editing ? {
+            copy: $t('save_as_copy')
+          } : {
             stay: $t('save_and_stay'),
             add: $t('save_and_add'),
             copy: $t('save_as_copy')
@@ -601,8 +603,6 @@ export default {
         });
     },
     save(method) {
-      if (this.$store.getters.editing === false) return;
-
       this.saving = true;
 
       if (method === "copy") {
@@ -660,6 +660,8 @@ export default {
             });
           });
       }
+
+      if (this.$store.getters.editing === false) return;
 
       const id = this.$helpers.shortid.generate();
       this.$store.dispatch("loadingStart", { id });

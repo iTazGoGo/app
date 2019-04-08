@@ -1,7 +1,7 @@
 <template>
   <div class="v-header-button">
     <div v-if="Object.keys(options).length > 0" class="options">
-      <select :disabled="disabled" v-model="choice" @change="emitChange">
+      <select v-model="choice" @change="emitChange">
         <option disabled selected value=""> {{ $t("more_options") }} </option>
         <option v-for="(display, value) in options" :value="value" :key="value">
           {{ display }}
@@ -235,16 +235,12 @@ button[disabled] {
     z-index: +2;
     color: var(--black);
 
-    &:hover:not([disabled]) + i {
-      opacity: 1;
+    & + i {
+      color: var(--dark-gray);
     }
 
-    &[disabled] {
-      cursor: not-allowed;
-
-      & + i {
-        opacity: 0.1;
-      }
+    &:hover + i {
+      color: var(--darkest-gray);
     }
   }
 }
