@@ -59,13 +59,17 @@
           :disabled="!editing"
           :loading="saving"
           :label="$t('save')"
-          :options="!editing ? {
-            copy: $t('save_as_copy')
-          } : {
-            stay: $t('save_and_stay'),
-            add: $t('save_and_add'),
-            copy: $t('save_as_copy')
-          }"
+          :options="
+            !editing
+              ? {
+                  copy: $t('save_as_copy')
+                }
+              : {
+                  stay: $t('save_and_stay'),
+                  add: $t('save_and_add'),
+                  copy: $t('save_as_copy')
+                }
+          "
           icon="check"
           color="action"
           @click="singleItem ? save('stay') : save('leave')"
