@@ -168,7 +168,7 @@ a {
   }
 
   &:not([disabled]):active i {
-    transform: scale(0.8);
+    transform: scale(0.9);
     opacity: 0.8;
   }
 
