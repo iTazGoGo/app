@@ -237,7 +237,10 @@ export default {
   color: var(--darkest-gray);
   transform-origin: top;
   box-shadow: var(--box-shadow);
-  border: 2px solid var(--lighter-gray);
+  border-right: 2px solid var(--lighter-gray);
+  border-bottom: 2px solid var(--lighter-gray);
+  border-left: 2px solid var(--lighter-gray);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
 
   @media (min-width: 800px) {
     left: var(--nav-sidebar-width);
@@ -437,9 +440,9 @@ export default {
           background-color: var(--warning);
           border-radius: 50%;
           position: absolute;
-          top: 5%;
-          right: 5%;
-          border: 1px solid var(--white);
+          top: -3%;
+          right: -3%;
+          border: 2px solid var(--white);
           transform: scale(0);
           transition: transform var(--fast) var(--transition-out);
         }
