@@ -59,3 +59,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.interfaces {
+  padding: 0 32px var(--page-padding-bottom);
+}
+</style>

@@ -212,7 +212,6 @@ export default {
   width: var(--width-small);
   overflow: hidden;
   transition: box-shadow var(--fast) var(--transition);
-  background-color: var(--white);
   cursor: pointer;
 
   a {
@@ -223,10 +222,13 @@ export default {
 
   &:not(.disabled):hover,
   &:not(.disabled).selected {
-    //
+    .header {
+      background-color: var(--light-gray) !important;
+    }
   }
 
   .header {
+    transition: all var(--fast) var(--transition);
     height: var(--width-small);
     border-radius: var(--border-radius);
     overflow: hidden;
