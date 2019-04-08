@@ -1,6 +1,10 @@
 <template>
   <div class="collections">
-    <v-header :breadcrumb="breadcrumb" icon="box" icon-color="warning">
+    <v-header
+      :breadcrumb="breadcrumb"
+      icon-color="warning"
+      icon-link="/settings"
+    >
       <template slot="buttons">
         <v-header-button
           icon="add"

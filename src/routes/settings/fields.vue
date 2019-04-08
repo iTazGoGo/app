@@ -3,7 +3,7 @@
   <div class="settings-fields" v-else>
     <v-header
       :breadcrumb="breadcrumb"
-      :icon-link="`/settings`"
+      :icon-link="`/settings/collections`"
       icon-color="warning"
     >
       <template slot="buttons">

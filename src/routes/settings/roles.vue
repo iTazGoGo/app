@@ -2,7 +2,7 @@
   <div class="settings-roles">
     <v-header
       :breadcrumb="breadcrumb"
-      :icon-link="`/settings`"
+      icon-link="/settings"
       icon-color="warning"
     >
       <template slot="buttons">
