@@ -121,7 +121,13 @@ export default {
       // We need to clone the array, otherwise the pop from below will modify the original passed
       // in array
       const breadcrumbClone = [...breadcrumb];
-      breadcrumbClone.pop();
+
+      // If a custom title hasn't been given, we use the last item in the breadcrumb as title. Therefore
+      // we have to remove the last one here so we don't end up with two of the same links
+      if (!this.title) {
+        breadcrumbClone.pop();
+      }
+
       return breadcrumbClone.length > 0 ? breadcrumbClone : null;
     }
   },

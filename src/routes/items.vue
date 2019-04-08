@@ -6,6 +6,7 @@
       :item-detail="false"
       :breadcrumb="breadcrumb"
       :icon="collectionInfo.icon || 'box'"
+      :title="currentBookmark && currentBookmark.title"
     >
       <template slot="title">
         <button
@@ -18,9 +19,6 @@
             {{ currentBookmark ? "bookmark" : "bookmark_border" }}
           </i>
         </button>
-        <div v-if="currentBookmark" class="bookmark-name no-wrap">
-          {{ currentBookmark.title }}
-        </div>
       </template>
       <v-search-filter
         v-show="selection && selection.length === 0 && !emptyCollection"
@@ -738,15 +736,5 @@ label.style-4 {
   i {
     color: var(--accent);
   }
-}
-
-.bookmark-name {
-  color: var(--accent);
-  margin-left: 5px;
-  margin-top: 3px;
-  font-size: 12px;
-  line-height: 1.1;
-  font-weight: 700;
-  text-transform: uppercase;
 }
 </style>
