@@ -11,7 +11,8 @@
       <i class="material-icons">expand_more</i>
     </header>
     <div class="links">
-      <nav-menu :links="userLinks" />
+      <nav-menu :links="userLinks" class="menu" />
+      <hr />
       <button class="sign-out" @click="confirmSignOut = true">
         <i class="material-icons icon">exit_to_app</i> {{ $t("sign_out") }}
       </button>
@@ -238,5 +239,15 @@ export default {
       fill: currentColor;
     }
   }
+}
+
+.menu /deep/ nav {
+  margin-bottom: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 2px solid var(--lighter-gray);
+  margin-bottom: 10px;
 }
 </style>
