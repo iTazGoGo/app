@@ -716,18 +716,20 @@ label.style-4 {
 
 .bookmark {
   margin-left: 5px;
-  opacity: 0.4;
-  transition: opacity var(--fast) var(--transition);
   position: relative;
 
-  &:hover {
-    opacity: 1;
-  }
-
   i {
+    transition: color var(--fast) var(--transition);
+    color: var(--light-gray);
     font-size: 24px;
     height: 20px;
     transform: translateY(-1px); // Vertical alignment of icon
+  }
+
+  &:hover {
+    i {
+      color: var(--darker-gray);
+    }
   }
 }
 
