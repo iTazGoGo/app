@@ -25,6 +25,13 @@
       :icon="singleItem ? collectionInfo.icon : 'arrow_back'"
       item-detail
     >
+      <template v-if="status" slot="title">
+        <span
+          class="status-indicator"
+          v-tooltip="statusName"
+          :style="{ backgroundColor: `var(--${statusColor})` }"
+        />
+      </template>
       <template slot="buttons">
         <v-header-button
           v-if="!newItem && !singleItem && permission.delete !== 'none'"
@@ -480,6 +487,35 @@ export default {
         ...field,
         name: formatTitle(field.field)
       }));
+    },
+
+    // Gets the configured color for the current status (this.status) of the item. This will be
+    // fetched out of this.fields
+    statusColor() {
+      if (this.statusField && this.status) {
+        const statusMapping = this.fields[this.statusField].options
+          .status_mapping;
+
+        if (!statusMapping) return null;
+
+        return statusMapping[this.status].background_color || null;
+      }
+
+      return null;
+    },
+
+    // The configured name of the current status.
+    statusName() {
+      if (this.statusField && this.status) {
+        const statusMapping = this.fields[this.statusField].options
+          .status_mapping;
+
+        if (!statusMapping) return null;
+
+        return statusMapping[this.status].name || null;
+      }
+
+      return null;
     }
   },
   created() {
@@ -999,5 +1035,12 @@ export default {
     border-bottom: 1px dotted var(--lighter-gray);
     color: var(--warning);
   }
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  margin-left: 8px;
 }
 </style>
