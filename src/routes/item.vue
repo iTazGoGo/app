@@ -1040,9 +1040,10 @@ export default {
 }
 
 .status-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
   margin-left: 8px;
+  margin-top: 1px;
 }
 </style>
