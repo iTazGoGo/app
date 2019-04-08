@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <li v-for="{ path, name, target, icon, color } in links" :key="path">
-          <div v-if="path.startsWith('http')" :class="color || null">
+          <template v-if="path.startsWith('http')">
             <a :href="path" :class="color || null" :target="target">
               <i v-if="icon" class="material-icons icon">{{ icon }}</i>
               <svg v-else class="icon" viewBox="0 0 17 18">
@@ -14,7 +14,7 @@
               </svg>
               {{ name }}
             </a>
-          </div>
+          </template>
           <router-link v-else-if="path" :to="path" :class="color || null">
             <i v-if="icon" class="material-icons icon">{{ icon }}</i>
             <svg v-else class="icon" viewBox="0 0 17 18">
