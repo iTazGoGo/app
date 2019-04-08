@@ -3,8 +3,7 @@
     <form
       v-show="
         commentPermission !== 'none' &&
-          commentPermission !== 'read' &&
-          show !== 'activity'
+          commentPermission !== 'read'
       "
       class="new-comment"
       @submit.prevent="postComment"
@@ -121,37 +120,14 @@ export default {
       type: Boolean,
       default: false
     },
-    show: {
-      type: String,
-      default: "both"
-    },
     commentPermission: {
       type: String,
       default: "none"
     }
   },
   computed: {
-    activityFiltered() {
-      switch (this.show) {
-        case "comments":
-          return this.commentPermission === "none"
-            ? []
-            : this.activity.filter(item => item.comment !== null);
-        case "activity":
-          return this.activity.filter(item => item.comment === null);
-        case "both":
-        default:
-          return this.activity.filter(item => {
-            if (this.commentPermission === "none") {
-              if (item.comment != null) return false;
-            }
-
-            return true;
-          });
-      }
-    },
     activityWithChanges() {
-      const activityWithChanges = this.activityFiltered.map((activity, i) => ({
+      const activityWithChanges = this.activity.map((activity, i) => ({
         ...activity,
         changes: this.getChanges(activity.id, i),
         revision: this.revisions[activity.id]
@@ -163,7 +139,7 @@ export default {
         activityWithChanges &&
         activityWithChanges[activityWithChanges.length - 1];
 
-      if (!lastItem && this.show !== "comments") {
+      if (!lastItem) {
         activityWithChanges.push({
           action: "external",
           comment: this.$t("activity_outside_directus"),
@@ -207,19 +183,19 @@ export default {
 
       let previousUpdate = null;
 
-      for (let i = index + 1; i < this.activityFiltered.length; i++) {
+      for (let i = index + 1; i < this.activity.length; i++) {
         if (
-          this.activityFiltered[i].action === "update" ||
-          this.activityFiltered[i].action === "create" ||
-          this.activityFiltered[i].action === "upload"
+          this.activity[i].action === "update" ||
+          this.activity[i].action === "create" ||
+          this.activity[i].action === "upload"
         ) {
-          previousUpdate = this.activityFiltered[i];
+          previousUpdate = this.activity[i];
           break;
         }
       }
 
       if (!previousUpdate) {
-        if (this.activityFiltered[index].action === "create") {
+        if (this.activity[index].action === "create") {
           const data = revision.data;
 
           return this.$lodash.mapValues(data, (value, field) => ({
