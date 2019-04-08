@@ -159,7 +159,7 @@ body.no-padding {
 }
 
 body.info-active {
-  padding-right: 316px;
+  padding-right: 284px;
 }
 
 body.info-active-wide {
