@@ -10,7 +10,8 @@
         <v-header-button
           icon="delete_outline"
           key="delete"
-          color="danger"
+          color="gray"
+          hover-color="danger"
           :label="$t('delete')"
           @click="confirmRemove = true"
         />
