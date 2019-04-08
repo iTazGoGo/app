@@ -8,7 +8,7 @@
       :icon="icon"
       :to="iconLink"
       :color="iconColor ? iconColor + '-light' : 'lightest-gray'"
-      :icon-color="iconColor"
+      :icon-color="iconColor ? iconColor : 'gray'"
     />
     <div class="title" :class="{ 'has-breadcrumb': navBreadcrumb }">
       <ol class="breadcrumb" v-if="navBreadcrumb">
@@ -81,7 +81,7 @@ export default {
     },
     iconColor: {
       type: String,
-      default: "dark-gray"
+      default: undefined
     }
   },
   data() {

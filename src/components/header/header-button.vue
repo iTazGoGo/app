@@ -202,11 +202,10 @@ button.no-bg {
 }
 
 button[disabled] {
-  background-color: var(--darker-gray);
-  color: var(--dark-gray);
+  background-color: var(--lighter-gray) !important;
   cursor: not-allowed;
   i {
-    color: var(--gray);
+    color: var(--lightest-gray) !important;
   }
 }
 
