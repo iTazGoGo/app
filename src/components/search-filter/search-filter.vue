@@ -483,13 +483,13 @@ export default {
 
 @media (min-width: 1000px) {
   .search-filter {
-    width: 240px;
+    width: 200px;
 
     transition: width var(--slow) var(--transition);
 
     &.open,
     &:focus-within {
-      width: 340px;
+      width: 300px;
     }
   }
 }
