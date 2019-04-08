@@ -21,7 +21,8 @@
     <v-header
       :breadcrumb="breadcrumb"
       :info-toggle="!newItem && !batch && !activityDetail"
-      :icon-link="`/collections/${collection}`"
+      :icon-link="singleItem ? null : `/collections/${collection}`"
+      :icon="singleItem ? collectionInfo.icon : null"
       item-detail
     >
       <template slot="buttons">
