@@ -232,7 +232,7 @@ export default {
     position: absolute;
     left: 4px;
     top: 80px;
-    bottom: 0;
+    bottom: 8px;
     width: 2px;
     background-color: var(--lighter-gray);
     z-index: -1;
