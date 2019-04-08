@@ -116,7 +116,7 @@ export default {
           path: "/users",
           name: this.$t("user_directory"),
           target: "_self",
-          icon: "person"
+          icon: "people"
         });
       }
 
@@ -133,7 +133,7 @@ export default {
         path: `/users/${this.currentUserID}`,
         name: this.$t("my_profile"),
         target: "_self",
-        icon: "person"
+        icon: "account_circle"
       });
 
       return links;
