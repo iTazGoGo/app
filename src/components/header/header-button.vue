@@ -220,8 +220,7 @@ button[disabled] {
   z-index: +1;
 
   i {
-    opacity: 0.6;
-    transition: opacity var(--fast) var(--transition);
+    transition: color var(--fast) var(--transition);
   }
 
   select {
@@ -236,7 +235,7 @@ button[disabled] {
     color: var(--black);
 
     & + i {
-      color: var(--dark-gray);
+      color: var(--darker-gray);
     }
 
     &:hover + i {
