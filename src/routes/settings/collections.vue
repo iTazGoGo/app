@@ -1,6 +1,6 @@
 <template>
   <div class="collections">
-    <v-header :breadcrumb="breadcrumb" icon="box">
+    <v-header :breadcrumb="breadcrumb" icon="box" icon-color="warning">
       <template slot="buttons">
         <v-header-button
           icon="add"
@@ -145,8 +145,7 @@ export default {
       return [
         {
           name: this.$t("settings"),
-          path: "/settings",
-          color: "warning"
+          path: "/settings"
         },
         {
           name: this.$t("collections_and_fields"),

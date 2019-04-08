@@ -1,6 +1,10 @@
 <template>
   <div class="settings-roles">
-    <v-header :breadcrumb="breadcrumb" :icon-link="`/settings`">
+    <v-header
+      :breadcrumb="breadcrumb"
+      :icon-link="`/settings`"
+      icon-color="warning"
+    >
       <template slot="buttons">
         <v-header-button
           icon="add"
@@ -56,8 +60,7 @@ export default {
       return [
         {
           name: this.$t("settings"),
-          path: "/settings",
-          color: "warning"
+          path: "/settings"
         },
         {
           name: this.$t("roles"),

@@ -1,7 +1,11 @@
 <template>
   <not-found v-if="!collectionInfo" />
   <div class="settings-fields" v-else>
-    <v-header :breadcrumb="breadcrumb" :icon-link="`/settings`">
+    <v-header
+      :breadcrumb="breadcrumb"
+      :icon-link="`/settings`"
+      icon-color="warning"
+    >
       <template slot="buttons">
         <v-header-button
           icon="delete_outline"
@@ -225,8 +229,7 @@ export default {
       return [
         {
           name: this.$t("settings"),
-          path: "/settings",
-          color: "warning"
+          path: "/settings"
         },
         {
           name: this.$t("collections_and_fields"),

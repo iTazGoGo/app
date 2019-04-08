@@ -7,21 +7,17 @@
       class="back"
       :icon="icon"
       :to="iconLink"
-      color="lightest-gray"
-      icon-color="dark-gray"
+      :color="iconColor ? iconColor + '-light' : 'lightest-gray'"
+      :icon-color="iconColor"
     />
     <div class="title" :class="{ 'has-breadcrumb': navBreadcrumb }">
       <ol class="breadcrumb" v-if="navBreadcrumb">
         <li
-          v-for="{ name, path, color = null } in navBreadcrumb"
+          v-for="{ name, path } in navBreadcrumb"
           :key="path"
           class="breadcrumb-item"
         >
-          <router-link
-            :to="path"
-            :style="{ color: color ? `var(--${color})` : null }"
-            >{{ name }}</router-link
-          >
+          <router-link :to="path">{{ name }}</router-link>
         </li>
       </ol>
 
@@ -82,6 +78,10 @@ export default {
     iconLink: {
       type: String,
       default: null
+    },
+    iconColor: {
+      type: String,
+      default: "dark-gray"
     }
   },
   data() {
