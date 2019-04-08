@@ -22,7 +22,7 @@
       :breadcrumb="breadcrumb"
       :info-toggle="!newItem && !batch && !activityDetail"
       :icon-link="singleItem ? null : `/collections/${collection}`"
-      :icon="singleItem ? collectionInfo.icon : null"
+      :icon="singleItem ? collectionInfo.icon : 'arrow_back'"
       item-detail
     >
       <template slot="buttons">
