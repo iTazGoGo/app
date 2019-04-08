@@ -2,18 +2,22 @@
   <form @submit.prevent>
     <fieldset>
       <legend class="style-3">{{ $t("layouts-tabular-fields") }}</legend>
-      <draggable v-model="sortList" @end="sort">
-        <div class="draggable" v-for="field in sortList" :key="field.field">
+      <draggable v-model="sortList" @end="sort" handle=".handle">
+        <div
+          class="draggable"
+          v-for="field in sortList"
+          :key="'tabular-layout-options-field-' + field.field"
+        >
           <v-checkbox
             class="checkbox"
             :key="field.field"
-            :id="field.field"
+            :id="'tabular-layout-options-field-' + field.field"
             :label="field.name"
             :value="field.field"
             :checked="fieldsInUse.includes(field.field)"
             @change="toggleField(field.field)"
           ></v-checkbox>
-          <i class="material-icons">drag_handle</i>
+          <i class="material-icons handle">drag_handle</i>
         </div>
       </draggable>
     </fieldset>
