@@ -1,10 +1,7 @@
 <template>
   <div class="v-activity">
     <form
-      v-show="
-        commentPermission !== 'none' &&
-          commentPermission !== 'read'
-      "
+      v-show="commentPermission !== 'none' && commentPermission !== 'read'"
       class="new-comment"
       @submit.prevent="postComment"
     >
@@ -327,31 +324,31 @@ export default {
 
     .revert {
       transition: all var(--fast) var(--transition);
-      background-color: var(--lightest-gray);
+      background-color: var(--light-gray);
       border-radius: var(--border-radius);
       padding: 4px;
       margin: 14px auto;
       width: 100%;
-      &:hover {
-        background-color: var(--lighter-gray);
-        i.material-icons {
-          color: var(--dark-gray);
-        }
-      }
       i.material-icons {
         width: auto;
         height: auto;
         transform: translateX(0);
         background-color: inherit;
         font-size: 24px;
-        color: var(--gray);
+        color: var(--lightest-gray);
+      }
+      &:hover {
+        background-color: var(--accent);
+        i.material-icons {
+          color: var(--white);
+        }
       }
     }
 
     .comment {
       position: relative;
       background-color: var(--white);
-      color: var(--light-gray);
+      color: var(--dark-gray);
       border-radius: var(--border-radius);
       padding: 8px 10px;
       display: inline-block;
