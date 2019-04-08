@@ -259,7 +259,7 @@ export default {
   event_count: "No Events | One Event | {count} Events",
   role_count: "No Roles | One Role | {count} Roles",
   item_count_filter:
-    "No Filtered Items | One Filtered Item | {count} Filtered Items",
+    "No Results | One Result | {count} Results",
   item_deleted: "Item Deleted",
   item_saved: "Item Saved | {count} Items Saved",
   junction_collection: "Junction Collection",
