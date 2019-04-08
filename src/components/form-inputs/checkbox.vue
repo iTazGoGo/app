@@ -94,7 +94,7 @@ input {
 label {
   font-size: inherit;
   cursor: pointer;
-  color: var(--lighter-gray);
+  color: var(--dark-gray);
 
   i {
     color: inherit;
