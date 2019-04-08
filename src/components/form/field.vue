@@ -8,7 +8,6 @@
               <component :is="fieldset ? 'legend' : 'label'" :for="field.field">
                 {{ field.name || $helpers.formatTitle(field.field)
                 }}<span
-                  v-tooltip="$t('required')"
                   class="optional"
                   v-if="field.required !== true || field.required === '0'"
                 >
