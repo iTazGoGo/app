@@ -72,18 +72,28 @@
               :disabled="existing"
           /></label>
           <label
-            >{{ $t("display_name") }}
+            >{{ $t("default_value") }}
             <v-input
               type="text"
-              disabled
-              :value="displayName"
-              :placeholder="$t('auto_generated')"
+              v-model="default_value"
+              placeholder="NULL"
+              :disabled="type === 'o2m' || type === 'translation'"
           /></label>
         </div>
         <label
           >{{ $t("note") }}
           <v-input type="text" v-model="note" :placeholder="$t('add_note')"
         /></label>
+
+        <div class="toggles">
+          <label class="toggle" v-if="type !== 'alias'"
+            ><v-toggle v-model="required" /> {{ $t("required") }}
+          </label>
+          <label class="toggle"
+            ><v-toggle v-model="readonly" /> {{ $t("readonly") }}
+          </label>
+        </div>
+
         <details class="advanced" :open="existing">
           <summary>{{ $t("advanced_options") }}</summary>
           <div class="advanced-form">
@@ -120,14 +130,6 @@
               }}</small>
             </label>
             <label
-              >{{ $t("default") }}
-              <v-input
-                type="text"
-                v-model="default_value"
-                placeholder="NULL"
-                :disabled="type === 'o2m' || type === 'translation'"
-            /></label>
-            <label
               >{{ $t("length") }}
               <v-input
                 :type="
@@ -149,12 +151,13 @@
                 v-model="validation"
                 :placeholder="$t('regex')"
             /></label>
-            <div />
-            <label class="toggle" v-if="type !== 'alias'"
-              ><v-toggle v-model="required" /> {{ $t("required") }}
-            </label>
-            <label class="toggle"
-              ><v-toggle v-model="readonly" /> {{ $t("readonly") }}
+            <label
+              class="toggle"
+              :class="{ disabled: primaryKeyDisabled }"
+              v-tooltip="primaryKeyTooltip"
+            >
+              <v-toggle v-model="primary_key" :disabled="primaryKeyDisabled" />
+              {{ $t("primary_key") }}
             </label>
             <label class="toggle"
               ><v-toggle v-model="unique" /> {{ $t("unique") }}</label
@@ -168,14 +171,6 @@
                 $t("hidden_browse")
               }}</label
             >
-            <label
-              class="toggle"
-              :class="{ disabled: primaryKeyDisabled }"
-              v-tooltip="primaryKeyTooltip"
-            >
-              <v-toggle v-model="primary_key" :disabled="primaryKeyDisabled" />
-              {{ $t("primary_key") }}
-            </label>
             <label class="toggle" v-if="isNumeric">
               <v-toggle v-model="signed" />
               {{ $t("signed") }}
@@ -575,7 +570,7 @@ export default {
       options: {},
       translation: {},
       readonly: false,
-      required: false,
+      required: true,
       unique: false,
       note: null,
       hidden_detail: false,
@@ -957,17 +952,15 @@ export default {
       }
 
       this.initRelation();
-
-      if (this.type === "status") {
-        this.required = true;
-      }
     },
     type(type) {
       if (this.existing) return;
 
       if (type) {
         this.datatype = mapping[type][this.databaseVendor].default;
-        // NOTE: this is to force string types that are longer than 255 characters into a TEXT mysql type. This should be refactored and cleaned up when this field-setup component is getting refactored.
+        // NOTE: this is to force string types that are longer than 255 characters into a TEXT mysql
+        // type. This should be refactored and cleaned up when this field-setup component is getting
+        // refactored.
         // Also, this is hardcoded for MySQL TEXT.
         // Fix for https://github.com/directus/app/issues/1149
         if (this.length > 255 && this.type.toLowerCase() === "string") {
@@ -1631,6 +1624,7 @@ form.schema {
   }
 
   .advanced-form,
+  .toggles,
   .name {
     display: grid;
     grid-gap: 32px 32px;
@@ -1686,6 +1680,7 @@ details {
   margin-top: 60px;
   border-top: 2px solid var(--lightest-gray);
   padding-top: 40px;
+  padding-bottom: 32px;
   summary {
     position: absolute;
     left: 50%;
@@ -1716,6 +1711,15 @@ details {
       font-size: 18px;
       margin-left: 2px;
       vertical-align: -19%;
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      font-feature-settings: "liga";
     }
   }
 
@@ -1850,5 +1854,9 @@ details {
       grid-area: v;
     }
   }
+}
+
+.toggles {
+  margin-top: 32px;
 }
 </style>

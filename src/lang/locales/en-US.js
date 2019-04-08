@@ -171,6 +171,7 @@ export default {
   db_updated: "Database successfully updated",
   db_update_failed: "The database couldn't be updated.",
   default: "Default",
+  default_value: "Default Value",
   delete: "Delete",
   delete_are_you_sure:
     "Are you sure you want to delete this item? This action can not be undone.",
