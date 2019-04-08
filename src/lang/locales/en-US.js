@@ -20,7 +20,7 @@ export default {
   activity: "Activity",
   my_activity: "My Activity",
   activity_log: "Activity Log",
-  activity_outside_directus: "This item was created outside of Directus.",
+  activity_outside_directus: "Item created outside of Directus",
   admin_email: "Admin Email",
   admin_password: "Admin Password",
   additional_info: "Additional Info",
